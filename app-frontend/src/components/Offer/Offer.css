@@ -1,0 +1,21 @@
+.offer {
+  display: flex;
+  background-color: white;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.offer img {
+  object-fit: contain;
+  width: 6rem;
+  padding: 1rem;
+  align-self: flex-start;
+
+  border: 1px solid #e9e7e7;
+  background-color: #fff;
+}
+
+.offer-details {
+  margin-left: 0.5em;
+}
