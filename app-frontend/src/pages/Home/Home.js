@@ -9,7 +9,7 @@ import FormSearch from '../../components/Filters/FormSearch';
 
 const Home = () => {
   return (
-    <Container className="mainContent">
+    <Container>
       <Row className="searchContainer">
         <Col lg={12}>
           <div className="searchFormContainer">

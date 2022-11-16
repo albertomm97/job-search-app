@@ -21,18 +21,25 @@ const Header = () => {
               <Link to="/">
                 <Nav.Link>Explore Jobs</Nav.Link>
               </Link>
+              <Link to="/cv">
+                <Nav.Link>CV</Nav.Link>
+              </Link>
             </Nav>
             <Nav>
-              <Nav.Link href="#marica2">
-                <Button className="companyButton" variant="outline-primary">
-                  COMPANY ACCESS
-                </Button>
-              </Nav.Link>
-              <Nav.Link href="#marica">
-                <Button className="candidateButton" variant="primary">
-                  CANDIDATE ACCESS
-                </Button>
-              </Nav.Link>
+              <Link to="/company-login">
+                <Nav.Link>
+                  <Button className="companyButton" variant="outline-primary">
+                    COMPANY ACCESS
+                  </Button>
+                </Nav.Link>
+              </Link>
+              <Link to="/candidate-login">
+                <Nav.Link>
+                  <Button className="candidateButton" variant="primary">
+                    CANDIDATE ACCESS
+                  </Button>
+                </Nav.Link>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
