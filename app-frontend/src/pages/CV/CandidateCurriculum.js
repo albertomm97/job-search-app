@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Description from './Description';
-import Languages from './Languages';
+import Languages from '../../components/CV/Languages';
 
 import PersonalData from './PersonalData';
-import Studies from './Studies';
-import WorkExperiences from './WorkExperiences';
+import Studies from '../../components/CV/Studies';
+import WorkExperiences from '../../components/CV/WorkExperiences';
 
 const CandidateCurriculum = () => {
   return (

@@ -1,13 +1,17 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-const Language = () => {
+const Study = ({ data }) => {
   return (
-    <div className="language">
-      <div>
+    <div className="experience">
+      <div className="experienceDetails">
+        <h6>{data.title}</h6>
+        <p>{data.university}</p>
+        <p>{data.category}</p>
         <p>
-          <span>Spanish</span>: <span>Native</span>
+          {data.startDate} - {data.endDate}
         </p>
+        <p>{data.description}</p>
       </div>
       <div className="experienceButtons">
         <Button variant="outline-success">Edit</Button>
@@ -17,4 +21,4 @@ const Language = () => {
   );
 };
 
-export default Language;
+export default Study;

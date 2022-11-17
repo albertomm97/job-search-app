@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import { getStudies } from '../../services/CV/getStudies';
 
 import Study from './Study';
 
 const Studies = () => {
+  const [studies, setStudies] = useState([]);
+
+  useEffect(() => {
+    setStudies(getStudies());
+  }, []);
+
   return (
     <div className="cvPart column">
       <div className="cvPartHeader">
@@ -13,10 +20,9 @@ const Studies = () => {
         </Button>
       </div>
       <div className="experiences">
-        <Study />
-        <Study />
-        <Study />
-        <Study />
+        {studies.map((study) => (
+          <Study key={study.id} data={study} />
+        ))}
       </div>
     </div>
   );

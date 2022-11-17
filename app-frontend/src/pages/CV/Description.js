@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
+import { getDescription } from '../../services/CV/getDescription';
+
 const Description = () => {
+  const [description, setDescription] = useState({});
+
+  useEffect(() => {
+    setDescription(getDescription());
+  }, []);
+
+  if (!description.description) {
+    return <></>;
+  }
+
+  const parragraphs = description.description.split('</br>');
+
   return (
     <div className="cvPart column">
       <div className="cvPartHeader">
@@ -11,17 +25,9 @@ const Description = () => {
         </Button>
       </div>
       <div className="experiences">
-        <p>
-          kjdsakldjsakldjk lasdjaskjd kasjdklajd ksajdk kjdsakldjsakldjk
-          lasdjaskjd kasjdklajd ksajdk kjdsakldjsakldjk lasdjaskjd kasjdklajd
-          ksajdk kjdsakldjsakldjk lasdjaskjd kasjdklajd ksajdk
-        </p>
-        <p>
-          kjdsakldjsakldjk lasdjaskjd kasjdklajd ksajdkkjdsakldjsakldjk
-          lasdjaskjd kasjdklajd ksajdkkjdsakldjsakldjk lasdjaskjd kasjdklajd
-          ksajdkkjdsakldjsakldjk lasdjaskjd kasjdklajd ksajdkkjdsakldjsakldjk
-          lasdjaskjd kasjdklajd ksajdk
-        </p>
+        {parragraphs.map((p) => (
+          <p key={p}>{p}</p>
+        ))}
       </div>
     </div>
   );

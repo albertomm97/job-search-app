@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
 import Language from './Languaje';
 
+import { getLanguages } from '../../services/CV/getLanguages';
+
 const Languages = () => {
+  const [languages, setLanguages] = useState([]);
+
+  useEffect(() => {
+    setLanguages(getLanguages());
+  }, []);
+
   return (
     <div className="cvPart column">
       <div className="cvPartHeader">
@@ -13,8 +21,9 @@ const Languages = () => {
         </Button>
       </div>
       <div className="languages">
-        <Language />
-        <Language />
+        {languages.map((language) => (
+          <Language key={language.id} data={language} />
+        ))}
       </div>
     </div>
   );
