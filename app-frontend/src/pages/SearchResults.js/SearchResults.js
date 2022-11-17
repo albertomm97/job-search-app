@@ -8,6 +8,8 @@ const SearchResults = () => {
   const filterOffer = useContext(FilterOfferContext);
   filterOffer.keyword = filterOffer.keyword || '';
 
+  console.log(filterOffer.filter);
+
   const offers = useOffers(filterOffer.filter);
 
   return <OfferList offers={offers} />;

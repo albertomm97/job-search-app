@@ -9,6 +9,7 @@ const useOffers = (filter) => {
 
   useEffect(() => {
     setOffers(getOffers());
+    console.log('api call from offers');
   }, [filter]);
 
   return offers;
