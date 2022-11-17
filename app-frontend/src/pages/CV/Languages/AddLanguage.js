@@ -7,12 +7,9 @@ import { Link } from 'wouter';
 
 const AddLanguage = () => {
   const [formData, setFormData] = useState({
-    category: '',
+    language: '',
     title: '',
-    startDate: '',
-    endDate: '',
-    currentlyStudying: '',
-    university: '',
+    level: '',
   });
 
   const handleAddEditSubmit = (event) => {
@@ -29,14 +26,14 @@ const AddLanguage = () => {
 
   return (
     <Form className="loginCandidateForm center" onSubmit={handleAddEditSubmit}>
-      <h2>Add Study</h2>
+      <h2>Add Language</h2>
       <Form.Group className="mb-3" controlId="formBasicPersonalData">
-        <Form.Label>Study Level</Form.Label>
+        <Form.Label>Language</Form.Label>
         <Form.Select aria-label="Default select example">
-          <option disabled>Select Study Level</option>
-          <option value="nothing">No studies</option>
-          <option value="highschool">High School</option>
-          <option value="degree">Degree</option>
+          <option disabled>Select language</option>
+          <option value="english">English</option>
+          <option value="spanish">Spanish</option>
+          <option value="german">German</option>
         </Form.Select>
 
         <Form.Label>Study Title</Form.Label>
@@ -46,36 +43,6 @@ const AddLanguage = () => {
           placeholder="Type your study title"
           onChange={handleChange}
         />
-
-        <Form.Label>Study Center</Form.Label>
-        <Form.Control
-          name="center"
-          type="text"
-          placeholder="Type your study center"
-          onChange={handleChange}
-        />
-
-        <Form.Label>Currently studying here</Form.Label>
-        <Form.Check
-          name="currentlyStudying"
-          value="yes"
-          label="Yes"
-          type="radio"
-          onChange={handleChange}
-        />
-        <Form.Check
-          name="currentlyStudying"
-          value="no"
-          label="No"
-          type="radio"
-          onChange={handleChange}
-        />
-
-        <Form.Label>Start Date</Form.Label>
-        <Form.Control name="startDate" type="date" onChange={handleChange} />
-
-        <Form.Label>End Date</Form.Label>
-        <Form.Control name="endDate" type="date" onChange={handleChange} />
       </Form.Group>
 
       <Button variant="primary" type="submit">

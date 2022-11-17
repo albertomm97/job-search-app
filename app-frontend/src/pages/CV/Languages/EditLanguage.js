@@ -7,16 +7,12 @@ import { Link } from 'wouter';
 
 const EditLanguage = () => {
   const [formData, setFormData] = useState({
-    companyName: '',
+    language: '',
     title: '',
-    startDate: '',
-    endDate: '',
-    category: '',
-    currentlyWorking: false,
-    description: '',
+    level: '',
   });
 
-  const handleAddWorkExperienceSubmit = (event) => {
+  const handleAddEditSubmit = (event) => {
     event.preventDefault();
   };
 
@@ -29,67 +25,28 @@ const EditLanguage = () => {
   };
 
   return (
-    <Form
-      className="loginCandidateForm center"
-      onSubmit={handleAddWorkExperienceSubmit}
-    >
-      <h2>Edit Work Experience</h2>
+    <Form className="loginCandidateForm center" onSubmit={handleAddEditSubmit}>
+      <h2>Edit Language</h2>
       <Form.Group className="mb-3" controlId="formBasicPersonalData">
-        <Form.Label>Company Name</Form.Label>
-        <Form.Control
-          name="companyName"
-          type="text"
-          placeholder="Company name"
-          onChange={handleChange}
-        />
-        <Form.Label>Job Title</Form.Label>
+        <Form.Label>Language</Form.Label>
+        <Form.Select aria-label="Default select example">
+          <option disabled>Select language</option>
+          <option value="english">English</option>
+          <option value="spanish">Spanish</option>
+          <option value="german">German</option>
+        </Form.Select>
+
+        <Form.Label>Study Title</Form.Label>
         <Form.Control
           name="title"
           type="text"
-          placeholder="Type your surname"
+          placeholder="Type your study title"
           onChange={handleChange}
         />
-        <Form.Label>Job Category</Form.Label>
-        <Form.Select aria-label="Default select example">
-          <option disabled>Select Job Category</option>
-          <option value="backend">Backend</option>
-          <option value="frontend">Frontend</option>
-          <option value="fullstack">Fullstack</option>
-        </Form.Select>
-        <Form.Label>Description</Form.Label>
-        <Form.Control
-          as="textarea"
-          name="description"
-          placeholder="Type job description"
-          style={{ height: '200px' }}
-          onChange={handleChange}
-        />
-
-        <Form.Label>Currently working here</Form.Label>
-        <Form.Check
-          name="currentlyWorking"
-          value="yes"
-          label="Yes"
-          type="radio"
-          onChange={handleChange}
-        />
-        <Form.Check
-          name="currentlyWorking"
-          value="no"
-          label="No"
-          type="radio"
-          onChange={handleChange}
-        />
-
-        <Form.Label>Start Date</Form.Label>
-        <Form.Control name="birthdate" type="date" onChange={handleChange} />
-
-        <Form.Label>End Date</Form.Label>
-        <Form.Control name="birthdate" type="date" onChange={handleChange} />
       </Form.Group>
 
       <Button variant="primary" type="submit">
-        Complete
+        Edit
       </Button>
     </Form>
   );
