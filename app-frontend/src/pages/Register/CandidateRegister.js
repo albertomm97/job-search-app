@@ -7,12 +7,17 @@ import { Link } from 'wouter';
 
 const CandidateRegister = () => {
   const [formData, setFormData] = useState({
+    name: '',
+    surname: '',
+    birthDate: '',
     email: '',
     password: '',
   });
 
   const handleCandidateRegisterSubmit = (event) => {
     event.preventDefault();
+
+    
   };
 
   const handleChange = (event) => {
@@ -50,22 +55,6 @@ const CandidateRegister = () => {
           name="surname"
           type="text"
           placeholder="Type your surname"
-          onChange={handleChange}
-        />
-
-        <Form.Label>Are you working?</Form.Label>
-        <Form.Check
-          name="isWorking"
-          value="1"
-          label="Yes"
-          type="radio"
-          onChange={handleChange}
-        />
-        <Form.Check
-          name="isWorking"
-          value="0"
-          label="No"
-          type="radio"
           onChange={handleChange}
         />
 

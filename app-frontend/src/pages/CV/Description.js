@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
+import { Link } from 'wouter';
+
 import { getDescription } from '../../services/CV/getDescription';
 
 const Description = () => {
@@ -20,9 +22,11 @@ const Description = () => {
     <div className="cvPart column">
       <div className="cvPartHeader">
         <h5>CV Text</h5>
-        <Button variant="outline-primary" className="companyButton">
-          Edit
-        </Button>
+        <Link to="/cv/edit-description">
+          <Button variant="outline-primary" className="companyButton">
+            Edit
+          </Button>
+        </Link>
       </div>
       <div className="experiences">
         {parragraphs.map((p) => (

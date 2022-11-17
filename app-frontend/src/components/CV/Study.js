@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
+import { Link } from 'wouter';
+
 const Study = ({ data }) => {
   return (
     <div className="experience">
@@ -14,7 +16,9 @@ const Study = ({ data }) => {
         <p>{data.description}</p>
       </div>
       <div className="experienceButtons">
-        <Button variant="outline-success">Edit</Button>
+        <Link to="/cv/edit-study">
+          <Button variant="outline-success">Edit</Button>
+        </Link>
         <Button variant="outline-danger">Delete</Button>
       </div>
     </div>

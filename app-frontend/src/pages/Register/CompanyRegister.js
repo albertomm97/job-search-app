@@ -7,8 +7,12 @@ import { Link } from 'wouter';
 
 const CompanyRegister = () => {
   const [formData, setFormData] = useState({
+    name: '',
+    surname: '',
     email: '',
     password: '',
+    companyName: '',
+    companyDescription: '',
   });
 
   const handleCompanyRegisterSubmit = (event) => {
@@ -79,7 +83,7 @@ const CompanyRegister = () => {
         <Form.Label>Company description</Form.Label>
         <Form.Control
           as="textarea"
-          name="companyName"
+          name="companyDescription"
           placeholder="Type company description"
           style={{ height: '200px' }}
           onChange={handleChange}

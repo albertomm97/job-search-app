@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
+import { Link } from 'wouter';
+
 import Language from './Languaje';
 
 import { getLanguages } from '../../services/CV/getLanguages';
@@ -16,9 +18,11 @@ const Languages = () => {
     <div className="cvPart column">
       <div className="cvPartHeader">
         <h5>Languagues</h5>
-        <Button variant="outline-primary" className="companyButton">
-          Add
-        </Button>
+        <Link to="/cv/add-language">
+          <Button variant="outline-primary" className="companyButton">
+            Add
+          </Button>
+        </Link>
       </div>
       <div className="languages">
         {languages.map((language) => (

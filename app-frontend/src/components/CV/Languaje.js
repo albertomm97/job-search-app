@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
+import { Link } from 'wouter';
+
 const Language = ({ data }) => {
   return (
     <div className="language">
@@ -10,7 +12,9 @@ const Language = ({ data }) => {
         </p>
       </div>
       <div className="experienceButtons">
-        <Button variant="outline-success">Edit</Button>
+        <Link to="/cv/edit-language">
+          <Button variant="outline-success">Edit</Button>
+        </Link>
         <Button variant="outline-danger">Delete</Button>
       </div>
     </div>
