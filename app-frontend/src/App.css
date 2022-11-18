@@ -64,6 +64,15 @@
   margin: 0 auto;
 }
 
+.offerLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.offerLink:hover {
+  color: inherit;
+}
+
 .loginCandidateForm {
   display: flex;
   flex-direction: column;
@@ -168,4 +177,22 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 2em;
+}
+
+.offerDetail {
+  justify-content: space-between;
+}
+
+.separator {
+  display: flex;
+}
+
+.inscriptionButton button {
+  background-color: #ff6340;
+  border: none;
+  text-transform: uppercase;
+}
+
+.inscriptionButton button:hover {
+  background-color: #d15236;
 }
