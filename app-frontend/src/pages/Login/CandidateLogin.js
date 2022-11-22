@@ -1,18 +1,29 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import { Link } from 'wouter';
+import { useLocation } from 'wouter';
+
+import { useUser } from '../../hooks/useUser';
 
 const CandidateLogin = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const [, navigate] = useLocation();
+  const { login, isLogged } = useUser();
+
+  useEffect(() => {
+    if (isLogged) navigate('/');
+  }, [isLogged, navigate]);
 
   const handleCandidateLoginSubmit = (event) => {
     event.preventDefault();
+
+    login(formData, 'user');
   };
 
   const handleChange = (event) => {

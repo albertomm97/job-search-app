@@ -14,8 +14,7 @@ const Job = ({ data }) => {
         </p>
         <p>{data.description.slice(0, 100) + '...'}</p>
         <p>
-          {data.jobType} - {data.experience} - {data.jobCategory} -{' '}
-          {data.salary}
+          {data.type} - {data.experience} - {data.category} - {data.salary}
         </p>
       </div>
       <div className="experienceButtons">

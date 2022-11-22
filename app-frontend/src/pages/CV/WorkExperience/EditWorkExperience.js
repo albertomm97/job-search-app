@@ -1,11 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import { Link } from 'wouter';
+import { useLocation } from 'wouter';
+import { useUser } from '../../../hooks/useUser';
 
 const EditWorkExperience = () => {
+  const [, navigate] = useLocation();
+  const { isLogged, type } = useUser();
+
+  if (!isLogged || type !== 'user') navigate('/');
+
   const [formData, setFormData] = useState({
     companyName: '',
     title: '',

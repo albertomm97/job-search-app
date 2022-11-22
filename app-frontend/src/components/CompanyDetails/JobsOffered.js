@@ -10,7 +10,9 @@ const JobsOffered = () => {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    setJobs(getJobsOffered());
+    const jobsOffered = getJobsOffered();
+    setJobs(jobsOffered);
+    localStorage.setItem('jobsOffered', JSON.stringify(jobsOffered));
   }, []);
 
   return (

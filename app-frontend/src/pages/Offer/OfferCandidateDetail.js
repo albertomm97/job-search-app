@@ -3,27 +3,23 @@ import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/Form';
 
 import { getOffers } from '../../services/getOffers';
+import { useLocation } from 'wouter';
+import { useUser } from '../../hooks/useUser';
 
 const OfferCandidateDetails = ({ params }) => {
+  const [, navigate] = useLocation();
+  const { isLogged, type } = useUser();
+
   const handleInscription = (event) => {
     event.preventDefault();
+    if (!isLogged || type !== 'user') navigate('/candidate-login');
+
     // Get the offer and company data that we need
     // Get the currently logged user data
     // Send to server
   };
 
-  const jsonOffers = localStorage.getItem('lastSearchedOffers');
-
-  let offers = null;
-  let desiredOffer = null;
-  if (jsonOffers) {
-    offers = JSON.parse(jsonOffers);
-    desiredOffer = offers.find((offer) => offer.id === params.id);
-  }
-
-  if (desiredOffer === undefined) {
-    desiredOffer = getOffers(params);
-  }
+  const desiredOffer = getOffers({ id: params.id });
 
   console.log(desiredOffer);
 
@@ -43,7 +39,9 @@ const OfferCandidateDetails = ({ params }) => {
           </div>
         </div>
         <Form onSubmit={handleInscription} className="inscriptionButton">
-          <Button className>Sign up for the offer</Button>
+          <Button className type="submit">
+            Sign up for the offer
+          </Button>
         </Form>
       </div>
       <div className="cvPart column">

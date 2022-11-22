@@ -1,13 +1,30 @@
 import React from 'react';
 
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-
-import { Link } from 'wouter';
+import { useUser } from '../../hooks/useUser';
+import UserHeader from './UserHeader';
+import CompanyHeader from './CompanyHeader';
+import GenericHeader from './GenericHeader';
 
 const Header = () => {
+  const { isLogged, type, logout } = useUser();
+
+  console.log(isLogged);
+  console.log(type);
+  return (
+    <header className="App-header">
+      {isLogged ? (
+        type === 'user' ? (
+          <UserHeader logout={logout} />
+        ) : (
+          <CompanyHeader logout={logout} />
+        )
+      ) : (
+        <GenericHeader />
+      )}
+    </header>
+  );
+
+  /*
   return (
     <header className="App-header">
       <Navbar bg="white" expand="lg">
@@ -49,6 +66,7 @@ const Header = () => {
       </Navbar>
     </header>
   );
+  */
 };
 
 export default Header;

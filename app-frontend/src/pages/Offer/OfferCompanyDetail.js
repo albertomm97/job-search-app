@@ -3,9 +3,17 @@ import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'wouter';
 
-import { getOffers } from '../../services/getOffers';
+import { getJobsOffered } from '../../services/CompanyDetails/getJobsOffered';
+
+import { useLocation } from 'wouter';
+import { useUser } from '../../hooks/useUser';
 
 const OfferCompanyDetails = ({ params }) => {
+  const [, navigate] = useLocation();
+  const { isLogged, type } = useUser();
+
+  if (!isLogged || type !== 'company') navigate('/');
+  //console.log(params);
   const handleInscription = (event) => {
     event.preventDefault();
     // Get the offer and company data that we need
@@ -13,20 +21,7 @@ const OfferCompanyDetails = ({ params }) => {
     // Send to server
   };
 
-  const jsonOffers = localStorage.getItem('lastSearchedOffers');
-
-  let offers = null;
-  let desiredOffer = null;
-  if (jsonOffers) {
-    offers = JSON.parse(jsonOffers);
-    desiredOffer = offers.find((offer) => offer.id === params.id);
-  }
-
-  if (desiredOffer === undefined) {
-    desiredOffer = getOffers(params);
-  }
-
-  console.log(desiredOffer);
+  const desiredOffer = getJobsOffered({ id: params.id });
 
   return (
     <div className="cvPartsContainer center">
@@ -44,7 +39,7 @@ const OfferCompanyDetails = ({ params }) => {
           </div>
         </div>
         <Form>
-          <Link to="/company/edit-offer">
+          <Link to={`/company/edit-offer/${desiredOffer.id}`}>
             <Button variant="sucess">Edit</Button>
           </Link>
         </Form>
