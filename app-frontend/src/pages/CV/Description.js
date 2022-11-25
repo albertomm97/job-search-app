@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 import { Link } from 'wouter';
 
-import { getDescription } from '../../services/CV/getDescription';
-
-const Description = () => {
-  const [description, setDescription] = useState({});
-
-  useEffect(() => {
-    setDescription(getDescription());
-  }, []);
-
-  if (!description.description) {
+const Description = ({ data }) => {
+  if (!data.description) {
     return <></>;
   }
 
-  const parragraphs = description.description.split('</br>');
+  const parragraphs = data.description.split('</br>');
 
   return (
     <div className="cvPart column">

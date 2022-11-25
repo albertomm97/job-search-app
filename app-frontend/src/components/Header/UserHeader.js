@@ -24,6 +24,10 @@ const UserHeader = ({ logout }) => {
             <Link to="/cv">
               <Nav.Link>CV</Nav.Link>
             </Link>
+
+            <Link to="/my-offers">
+              <Nav.Link>My Offers</Nav.Link>
+            </Link>
           </Nav>
 
           <Nav>

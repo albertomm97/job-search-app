@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { useLocation } from 'wouter';
 import { useUser } from '../../hooks/useUser';
 
-import { getJobsOffered } from '../../services/CompanyDetails/getJobsOffered';
+import { getJobById } from '../../services/CompanyDetails/jobsOfferedService';
 
 const EditOffer = ({ params }) => {
   const [, navigate] = useLocation();
@@ -14,7 +14,9 @@ const EditOffer = ({ params }) => {
 
   if (!isLogged || type !== 'company') navigate('/');
 
-  const desiredOffer = getJobsOffered({ id: params.id });
+  const desiredOffer = getJobById({ id: params.id });
+
+  console.log(desiredOffer);
 
   const [formData, setFormData] = useState({
     title: desiredOffer.title,

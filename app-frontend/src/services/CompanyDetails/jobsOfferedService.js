@@ -34,26 +34,23 @@ const jobs = [
 ];
 
 const getJobsOffered = (filter = {}) => {
-  const jsonOffers = localStorage.getItem('jobsOffered');
-
-  let offers = null;
-  let desiredOffer = null;
-  if (jsonOffers && filter.id) {
-    offers = JSON.parse(jsonOffers);
-    //console.log(`Offers: ${offers}`);
-    desiredOffer = offers.find((offer) => offer.id === filter.id);
-
-    if (desiredOffer) return desiredOffer;
-    //console.log(`Desired offer: ${desiredOffer}`);
-  }
-
   if (filter.id) {
-    return jobs.find((offer) => offer.id === filter.id);
-  } else if (Object.keys(filter).length === 0) {
+    // Get jobs from db
+    localStorage.setItem('jobs-offered', JSON.stringify(jobs));
     return jobs;
-  } else {
-    // apply filter
   }
 };
 
-export { getJobsOffered };
+const getJobById = (filter = {}) => {
+  if (!filter.id) return null;
+
+  const localJobs = JSON.parse(localStorage.getItem('jobs-offered'));
+
+  if (localJobs) {
+    return localJobs.find((job) => job.id === filter.id);
+  }
+
+  return jobs.find((job) => job.id === filter.id);
+};
+
+export { getJobsOffered, getJobById };

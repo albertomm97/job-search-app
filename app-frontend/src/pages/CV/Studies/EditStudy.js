@@ -6,19 +6,24 @@ import Form from 'react-bootstrap/Form';
 import { useLocation } from 'wouter';
 import { useUser } from '../../../hooks/useUser';
 
-const EditStudy = () => {
+const EditStudy = ({ params }) => {
   const [, navigate] = useLocation();
-  const { isLogged, type } = useUser();
+  const { isLogged, userData, type } = useUser();
 
   if (!isLogged || type !== 'user') navigate('/');
 
+  const study = userData.studies.find((exp) => exp.id === params.id);
+
+  console.log(params);
+  if (!study) console.log('STUDY NULL');
+
   const [formData, setFormData] = useState({
-    category: '',
-    title: '',
-    startDate: '',
-    endDate: '',
-    currentlyStudying: '',
-    university: '',
+    category: study.category,
+    title: study.title,
+    startDate: study.startDate,
+    endDate: study.endDate,
+    university: study.university,
+    description: study.description,
   });
 
   const handleAddEditSubmit = (event) => {
@@ -33,23 +38,41 @@ const EditStudy = () => {
     });
   };
 
+  const handleSelectChange = (event, param) => {
+    console.log(event.target.value);
+    setFormData({
+      ...formData,
+      [param]: event.target.value,
+    });
+    //console.log(formData);
+  };
+
   return (
     <Form className="loginCandidateForm center" onSubmit={handleAddEditSubmit}>
       <h2>Edit Study</h2>
       <Form.Group className="mb-3" controlId="formBasicPersonalData">
         <Form.Label>Study Level</Form.Label>
-        <Form.Select aria-label="Default select example">
-          <option disabled>Select Study Level</option>
+        <Form.Control
+          aria-label="Default select example"
+          onChange={(event) => handleSelectChange(event, 'category')}
+          as="select"
+          defaultValue={formData.category}
+          name="category"
+        >
+          <option value="select" disabled>
+            Select Study Level
+          </option>
           <option value="nothing">No studies</option>
           <option value="highschool">High School</option>
           <option value="degree">Degree</option>
-        </Form.Select>
+        </Form.Control>
 
         <Form.Label>Study Title</Form.Label>
         <Form.Control
           name="title"
           type="text"
           placeholder="Type your study title"
+          value={formData.title}
           onChange={handleChange}
         />
 
@@ -58,30 +81,35 @@ const EditStudy = () => {
           name="center"
           type="text"
           placeholder="Type your study center"
-          onChange={handleChange}
-        />
-
-        <Form.Label>Currently studying here</Form.Label>
-        <Form.Check
-          name="currentlyStudying"
-          value="yes"
-          label="Yes"
-          type="radio"
-          onChange={handleChange}
-        />
-        <Form.Check
-          name="currentlyStudying"
-          value="no"
-          label="No"
-          type="radio"
+          value={formData.university}
           onChange={handleChange}
         />
 
         <Form.Label>Start Date</Form.Label>
-        <Form.Control name="startDate" type="date" onChange={handleChange} />
+        <Form.Control
+          name="startDate"
+          type="date"
+          onChange={handleChange}
+          value={formData.startDate}
+        />
 
         <Form.Label>End Date</Form.Label>
-        <Form.Control name="endDate" type="date" onChange={handleChange} />
+        <Form.Control
+          name="endDate"
+          type="date"
+          onChange={handleChange}
+          value={formData.endDate}
+        />
+
+        <Form.Label>Description</Form.Label>
+        <Form.Control
+          as="textarea"
+          name="description"
+          placeholder="Type study description"
+          style={{ height: '200px' }}
+          value={formData.description}
+          onChange={handleChange}
+        />
       </Form.Group>
 
       <Button variant="primary" type="submit">

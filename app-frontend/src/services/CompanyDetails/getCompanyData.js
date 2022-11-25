@@ -1,5 +1,5 @@
 const companyData = {
-  id: 1,
+  id: '1',
   name: 'Intel',
   description:
     'KJAKLSJDKLSAJDKLAJSDK kajdk sjkdj akjd kajd kjakjd kja KJAKLSJDKLSAJDKLAJSDK kajdk sjkdj akjd kajd kjakjd kja KJAKLSJDKLSAJDKLAJSDK kajdk sjkdj akjd kajd kjakjd kja',

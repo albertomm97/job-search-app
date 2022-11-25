@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { getPersonalData } from '../../services/CV/getPersonalData';
+import React from 'react';
 
-const PersonalData = () => {
-  const [personalData, setData] = useState({});
-
-  useEffect(() => {
-    setData(getPersonalData());
-  }, []);
-
+const PersonalData = ({ data }) => {
   return (
     <div className="cvPart">
       <img className="cvPic" src="/logo192.png" />
       <div className="candidateDetails">
         <h4>
-          {personalData.name} {personalData.surname}
+          {data.name} {data.surname}
         </h4>
-        <p>{personalData.birthDate}</p>
-        <p>{personalData.email}</p>
+        <p>{data.birthDate}</p>
+        <p>{data.email}</p>
       </div>
     </div>
   );

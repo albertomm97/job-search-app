@@ -16,7 +16,7 @@ const Study = ({ data }) => {
         <p>{data.description}</p>
       </div>
       <div className="experienceButtons">
-        <Link to="/cv/edit-study">
+        <Link to={`/cv/edit-study/${data.id}`}>
           <Button variant="outline-success">Edit</Button>
         </Link>
         <Button variant="outline-danger">Delete</Button>

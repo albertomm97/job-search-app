@@ -41,8 +41,21 @@ const offers = [
 ];
 
 const getOffers = (filter = {}) => {
-  const jsonOffers = localStorage.getItem('lastSearchedOffers');
+  // crear query con el filtro
+  // ejecutar query
+  localStorage.setItem('lastSearchedOffers', JSON.stringify(offers));
+  // Base de datos
+  if (filter.id) {
+    return offers.find((offer) => offer.id === filter.id);
+  } else if (Object.keys(filter).length === 0) {
+    return offers;
+  } else {
+    return offers;
+  }
+};
 
+const getLocalOffer = (filter = {}) => {
+  const jsonOffers = localStorage.getItem('lastSearchedOffers');
   let localOffers = null;
   let desiredOffer = null;
   if (jsonOffers && filter.id) {
@@ -50,15 +63,6 @@ const getOffers = (filter = {}) => {
     desiredOffer = localOffers.find((offer) => offer.id === filter.id);
 
     if (desiredOffer) return desiredOffer;
-  }
-
-  // Base de datos
-  if (filter.id) {
-    return offers.find((offer) => offer.id === filter.id);
-  } else if (Object.keys(filter).length === 0) {
-    return offers;
-  } else {
-    // apply filter
   }
 };
 

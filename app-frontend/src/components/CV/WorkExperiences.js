@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 import WorkExperience from './WorkExperience';
 
 import { Link } from 'wouter';
-import { getWorkExperience } from '../../services/CV/getWorkExperience';
 
-const WorkExperiences = () => {
-  const [experience, setExperience] = useState([]);
-
-  useEffect(() => {
-    setExperience(getWorkExperience());
-  }, []);
-
+const WorkExperiences = ({ data }) => {
+  console.log(data);
   return (
     <div className="cvPart column">
       <div className="cvPartHeader">
@@ -24,7 +18,7 @@ const WorkExperiences = () => {
         </Link>
       </div>
       <div className="experiences">
-        {experience.map((exp) => (
+        {data.map((exp) => (
           <WorkExperience key={exp.id} data={exp} />
         ))}
       </div>

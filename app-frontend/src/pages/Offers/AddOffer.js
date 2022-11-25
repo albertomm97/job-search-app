@@ -13,19 +13,24 @@ const AddOffer = () => {
   if (!isLogged || type !== 'company') navigate('/');
 
   const [formData, setFormData] = useState({
+    id: '3',
     title: '',
-    category: '',
-    type: '',
+    companyName: 'Company Name',
     place: '',
-    studies: '',
+    uploadDate: '21/02/2023',
+    description: '',
+    email: 'company@gmail.com',
+    type: '',
+    category: '',
     experience: '',
     salary: '',
-    description: '',
+    studies: '',
+    profilePicture: '',
   });
 
   const handleAddEditSubmit = (event) => {
     event.preventDefault();
-    console.log(formData);
+    navigate('/company');
   };
 
   const handleChange = (event) => {

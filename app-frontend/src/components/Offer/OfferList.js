@@ -5,6 +5,8 @@ import Offer from './Offer';
 import { Link } from 'wouter';
 
 const OfferList = ({ offers }) => {
+  //console.log(`offers: ${offers}`);
+  //console.log(offers);
   return (
     <div className="offersContainer">
       {Array.isArray(offers) ? (

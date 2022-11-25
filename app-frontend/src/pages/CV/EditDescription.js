@@ -8,7 +8,7 @@ import { useUser } from '../../hooks/useUser';
 
 const EditDescription = () => {
   const [, navigate] = useLocation();
-  const { isLogged, type } = useUser();
+  const { isLogged, userData, type } = useUser();
 
   if (!isLogged || type !== 'user') navigate('/');
 
@@ -38,6 +38,7 @@ const EditDescription = () => {
           name="description"
           placeholder="Type job description"
           style={{ height: '200px' }}
+          value={userData.description}
           onChange={handleChange}
         />
       </Form.Group>

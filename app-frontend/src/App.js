@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 
 import { FilterOfferContextProvider } from './context/FilterOfferContext';
 import { UserContextProvider } from './context/UserContext';
+import { CompanyJobsContextProvider } from './context/CompanyJobsContext';
 
 import { Route, Switch } from 'wouter';
 
@@ -27,6 +28,7 @@ import EditDescription from './pages/CV/EditDescription';
 import CompanyDetail from './pages/CompanyDetails/CompanyDetail';
 import OfferCandidateDetails from './pages/Offer/OfferCandidateDetail';
 import OfferCompanyDetails from './pages/Offer/OfferCompanyDetail';
+import UserOffers from './pages/Offer/UserOffers';
 import AddOffer from './pages/Offers/AddOffer';
 import EditOffer from './pages/Offers/EditOffer';
 
@@ -55,21 +57,25 @@ const App = () => {
             />
             <Route
               component={EditWorkExperience}
-              path="/cv/edit-work-experience"
+              path="/cv/edit-work-experience/:id"
             />
             <Route component={AddStudy} path="/cv/add-study" />
-            <Route component={EditStudy} path="/cv/edit-study" />
+            <Route component={EditStudy} path="/cv/edit-study/:id" />
             <Route component={AddLanguage} path="/cv/add-language" />
-            <Route component={EditLanguage} path="/cv/edit-language" />
+            <Route component={EditLanguage} path="/cv/edit-language/:id" />
             <Route component={EditDescription} path="/cv/edit-description" />
+            <Route component={UserOffers} path="/my-offers" />
             <Route component={OfferCandidateDetails} path="/job-offer/:id" />
-            <Route
-              component={OfferCompanyDetails}
-              path="/company/job-offer/:id"
-            />
-            <Route component={CompanyDetail} path="/company" />
-            <Route component={AddOffer} path="/company/add-offer" />
-            <Route component={EditOffer} path="/company/edit-offer/:id" />
+
+            <CompanyJobsContextProvider>
+              <Route
+                component={OfferCompanyDetails}
+                path="/company/job-offer/:id"
+              />
+              <Route component={CompanyDetail} path="/company" />
+              <Route component={AddOffer} path="/company/add-offer" />
+              <Route component={EditOffer} path="/company/edit-offer/:id" />
+            </CompanyJobsContextProvider>
             <Route component={ErrorPage} path="/:rest" />
           </Switch>
         </Container>

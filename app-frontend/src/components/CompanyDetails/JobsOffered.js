@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 
 import Job from './Job';
 
 import { Link } from 'wouter';
-import { getJobsOffered } from '../../services/CompanyDetails/getJobsOffered';
 
-const JobsOffered = () => {
-  const [jobs, setJobs] = useState([]);
-
-  useEffect(() => {
-    const jobsOffered = getJobsOffered();
-    setJobs(jobsOffered);
-    localStorage.setItem('jobsOffered', JSON.stringify(jobsOffered));
-  }, []);
-
+const JobsOffered = ({ data }) => {
   return (
     <div className="cvPart column">
       <div className="cvPartHeader">
@@ -26,9 +17,7 @@ const JobsOffered = () => {
         </Link>
       </div>
       <div className="experiences">
-        {jobs.map((job) => (
-          <Job key={job.id} data={job} />
-        ))}
+        {data ? data.map((job) => <Job key={job.id} data={job} />) : <></>}
       </div>
     </div>
   );

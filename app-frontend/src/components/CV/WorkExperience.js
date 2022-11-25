@@ -15,7 +15,7 @@ const WorkExperience = ({ data }) => {
         <p>{data.description}</p>
       </div>
       <div className="experienceButtons">
-        <Link to="/cv/edit-work-experience">
+        <Link to={`/cv/edit-work-experience/${data.id}`}>
           <Button variant="outline-success">Edit</Button>
         </Link>
         <Button variant="outline-danger">Delete</Button>

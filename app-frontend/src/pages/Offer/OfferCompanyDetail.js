@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'wouter';
 
-import { getJobsOffered } from '../../services/CompanyDetails/getJobsOffered';
+import { getJobById } from '../../services/CompanyDetails/jobsOfferedService';
 
 import { useLocation } from 'wouter';
 import { useUser } from '../../hooks/useUser';
@@ -21,7 +21,7 @@ const OfferCompanyDetails = ({ params }) => {
     // Send to server
   };
 
-  const desiredOffer = getJobsOffered({ id: params.id });
+  const desiredOffer = getJobById({ id: params.id });
 
   return (
     <div className="cvPartsContainer center">

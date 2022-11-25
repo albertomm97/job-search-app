@@ -12,7 +12,7 @@ const Language = ({ data }) => {
         </p>
       </div>
       <div className="experienceButtons">
-        <Link to="/cv/edit-language">
+        <Link to={`/cv/edit-language/${data.id}`}>
           <Button variant="outline-success">Edit</Button>
         </Link>
         <Button variant="outline-danger">Delete</Button>

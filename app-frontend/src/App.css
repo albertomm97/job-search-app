@@ -199,3 +199,13 @@ body {
 .inscriptionButton button:hover {
   background-color: #d15236;
 }
+
+.cancelInscriptionButton button {
+  background-color: #d82902;
+  border: none;
+  text-transform: uppercase;
+}
+
+.cancelInscriptionButton button:hover {
+  background-color: #942007;
+}

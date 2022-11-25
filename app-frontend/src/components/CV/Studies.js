@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { getStudies } from '../../services/CV/getStudies';
 
 import { Link } from 'wouter';
 
 import Study from './Study';
 
-const Studies = () => {
-  const [studies, setStudies] = useState([]);
-
-  useEffect(() => {
-    setStudies(getStudies());
-  }, []);
-
+const Studies = ({ data }) => {
   return (
     <div className="cvPart column">
       <div className="cvPartHeader">
@@ -24,7 +17,7 @@ const Studies = () => {
         </Link>
       </div>
       <div className="experiences">
-        {studies.map((study) => (
+        {data.map((study) => (
           <Study key={study.id} data={study} />
         ))}
       </div>

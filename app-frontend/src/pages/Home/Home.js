@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FilterForm from '../../components/Filters/FilterForm';
-import SearchResults from '../SearchResults.js/SearchResults';
+import SearchResults from '../SearchResults/SearchResults';
 import FormSearch from '../../components/Filters/FormSearch';
 
 const Home = () => {

@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { getCompanyData } from '../../services/CompanyDetails/getCompanyData';
+import React from 'react';
 
-const CompanyData = () => {
-  const [companyData, setCompanyData] = useState({});
-
-  useEffect(() => {
-    setCompanyData(getCompanyData());
-  }, []);
-
+const CompanyData = ({ data }) => {
   return (
     <div className="cvPart">
       <img className="cvPic" src="/logo192.png" />
       <div className="candidateDetails">
-        <h4>{companyData.name}</h4>
-        <p>{companyData.description}</p>
-        <p>{companyData.email}</p>
+        <h4>{data.name}</h4>
+        <p>{data.description}</p>
+        <p>{data.email}</p>
       </div>
     </div>
   );

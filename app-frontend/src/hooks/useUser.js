@@ -8,10 +8,11 @@ const useUser = () => {
 
   const login = useCallback(
     (credentials, type) => {
-      const jwt = loginService(credentials, type);
-      window.sessionStorage.setItem('jwt', jwt);
+      const { jwtToken, userData } = loginService(credentials, type);
+      window.sessionStorage.setItem('jwt', jwtToken);
       window.sessionStorage.setItem('user-type', type);
-      setJwt(jwt);
+      window.sessionStorage.setItem('current-user', JSON.stringify(userData));
+      setJwt(jwtToken);
     },
     [setJwt]
   );
@@ -20,11 +21,13 @@ const useUser = () => {
     setJwt(null);
     window.sessionStorage.removeItem('jwt');
     window.sessionStorage.removeItem('user-type');
+    window.sessionStorage.removeItem('current-user');
   }, [setJwt]);
 
   return {
     isLogged: Boolean(jwt),
     type: window.sessionStorage.getItem('user-type'),
+    userData: JSON.parse(window.sessionStorage.getItem('current-user')),
     login,
     logout,
   };

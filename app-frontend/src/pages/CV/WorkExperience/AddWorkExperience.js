@@ -6,6 +6,8 @@ import Form from 'react-bootstrap/Form';
 import { useLocation } from 'wouter';
 import { useUser } from '../../../hooks/useUser';
 
+import { addWorkExperience } from '../../../services/CV/cvService';
+
 const AddWorkExperience = () => {
   const [, navigate] = useLocation();
   const { isLogged, type } = useUser();
@@ -13,18 +15,34 @@ const AddWorkExperience = () => {
   if (!isLogged || type !== 'user') navigate('/');
 
   const [formData, setFormData] = useState({
-    companyName: '',
+    id: '2',
     title: '',
+    company: '',
     startDate: '',
     endDate: '',
-    category: '',
-    currentlyWorking: false,
+    //category: '',
     description: '',
+    currentlyWorking: false,
   });
 
   const handleAddWorkExperienceSubmit = (event) => {
     event.preventDefault();
+
+    console.log(formData);
+
+    addWorkExperience(formData);
+    navigate('/cv');
   };
+
+  /*
+  id: '1',
+      title: 'Backend Engineer',
+      company: 'TusMuertos.SL',
+      startDate: '2018-02-25',
+      endDate: '2018-02-25',
+      description: 'SpringPollas en vinagre, Java Oh si si la puntita',
+      currentlyWorking: true,
+  */
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -43,7 +61,7 @@ const AddWorkExperience = () => {
       <Form.Group className="mb-3" controlId="formBasicPersonalData">
         <Form.Label>Company Name</Form.Label>
         <Form.Control
-          name="companyName"
+          name="company"
           type="text"
           placeholder="Company name"
           onChange={handleChange}
@@ -88,10 +106,10 @@ const AddWorkExperience = () => {
         />
 
         <Form.Label>Start Date</Form.Label>
-        <Form.Control name="birthdate" type="date" onChange={handleChange} />
+        <Form.Control name="startDate" type="date" onChange={handleChange} />
 
         <Form.Label>End Date</Form.Label>
-        <Form.Control name="birthdate" type="date" onChange={handleChange} />
+        <Form.Control name="endDate" type="date" onChange={handleChange} />
       </Form.Group>
 
       <Button variant="primary" type="submit">
