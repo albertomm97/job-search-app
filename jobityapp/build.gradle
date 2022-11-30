@@ -111,10 +111,14 @@ sourceSets {
 	}
 }
 
+apply plugin: 'application'
+
 bootJar {
 	baseName = 'jobity'
 	version = '0.0.1'
 }
+
+mainClassName = 'jobity.apps.Starter'
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.6'
