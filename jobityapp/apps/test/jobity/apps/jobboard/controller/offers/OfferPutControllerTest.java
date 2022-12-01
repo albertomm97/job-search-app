@@ -22,9 +22,10 @@ class OfferPutControllerTest {
     @Test
     void should_create_a_valid_offer() throws Exception {
         String body = "{\"title\": \"The best course\", \"salary\": \"5\"}";
+        String endpoint = "/offers/decf33ca-81a7-419f-a07a-74f214e928e5";
 
         mockMvc
-            .perform(request(HttpMethod.PUT, "/jobity/jobboard/offers/12345").content(body).contentType(MediaType.APPLICATION_JSON))
+            .perform(request(HttpMethod.PUT, endpoint).content(body).contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().is(201))
             .andExpect(content().string(""));
     }

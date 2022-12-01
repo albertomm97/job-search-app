@@ -19,12 +19,33 @@ public class OfferPutController {
         this.offerCreator = offerCreator;
     }
 
-    @PutMapping("/jobity/jobboard/offers/{id}")
-    public ResponseEntity<Object> create(@PathVariable String id,
-                                         @RequestBody CreateOfferRequest request) {
+    @PutMapping("/offers/{id}")
+    public ResponseEntity<String> create(@PathVariable String id,
+                                         @RequestBody Request request) {
 
-        offerCreator.create(request.getId(), request.getTitle(), request.getSalary());
+        offerCreator.create(new CreateOfferRequest(id, request.getTitle(), request.getSalary()));
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+}
+
+final class Request {
+    private String title;
+    private String salary;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSalary() {
+        return salary;
     }
 }

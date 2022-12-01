@@ -5,5 +5,5 @@ import java.util.Optional;
 public interface OfferRepository {
 
     void save(Offer offer);
-    Optional<Offer> search(String id);
+    Optional<Offer> search(OfferId id);
 }

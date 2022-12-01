@@ -1,9 +1,7 @@
 package jobity.jobboard.offers.application.create;
 
+import jobity.jobboard.offers.domain.*;
 import org.springframework.stereotype.Service;
-
-import jobity.jobboard.offers.domain.Offer;
-import jobity.jobboard.offers.domain.OfferRepository;
 
 @Service
 public final class OfferCreator {
@@ -14,8 +12,12 @@ public final class OfferCreator {
         this.offerRepository = offerRepository;
     }
 
-    public void create(String id, String title, String salary) {
-        Offer offer = new Offer(id, title, salary);
+    public void create(CreateOfferRequest request) {
+        Offer offer = new Offer(
+            new OfferId(request.getId()),
+            new OfferTitle(request.getTitle()),
+            new OfferSalary(request.getSalary())
+        );
 
         offerRepository.save(offer);
     }

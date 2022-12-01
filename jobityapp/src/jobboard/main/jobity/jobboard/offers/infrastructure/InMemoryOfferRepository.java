@@ -1,6 +1,7 @@
 package jobity.jobboard.offers.infrastructure;
 
 import jobity.jobboard.offers.domain.Offer;
+import jobity.jobboard.offers.domain.OfferId;
 import jobity.jobboard.offers.domain.OfferRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,11 +14,11 @@ public class InMemoryOfferRepository implements OfferRepository {
 
     @Override
     public void save(Offer offer) {
-        this.offers.put(offer.getId(), offer);
+        this.offers.put(offer.id().value(), offer);
     }
 
     @Override
-    public Optional<Offer> search(String id) {
-        return Optional.ofNullable(offers.get(id));
+    public Optional<Offer> search(OfferId id) {
+        return Optional.ofNullable(offers.get(id.value()));
     }
 }
