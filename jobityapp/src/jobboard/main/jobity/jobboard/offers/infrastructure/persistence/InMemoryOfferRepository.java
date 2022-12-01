@@ -1,4 +1,4 @@
-package jobity.jobboard.offers.infrastructure;
+package jobity.jobboard.offers.infrastructure.persistence;
 
 import jobity.jobboard.offers.domain.Offer;
 import jobity.jobboard.offers.domain.OfferId;

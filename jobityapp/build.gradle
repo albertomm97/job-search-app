@@ -19,6 +19,17 @@ allprojects {
 		implementation 'com.vlkan.log4j2:log4j2-logstash-layout:1.0.5'
 		implementation 'io.github.cdimascio:java-dotenv:5.2.2'
 
+		// Hibernate
+		implementation 'org.hibernate:hibernate-core:6.1.5.Final'
+		implementation 'org.springframework:spring-orm:6.0.2'
+		implementation 'org.apache.tomcat:tomcat-dbcp:10.1.2'
+
+		// Read XML for Entity Mapping
+		implementation 'com.sun.xml.bind:jaxb-impl:4.0.1'
+		implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+
+		implementation 'mysql:mysql-connector-java:8.0.30'
+
 		// Test
 		testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
 		testImplementation 'org.mockito:mockito-core:4.8.0'
@@ -70,6 +81,7 @@ subprojects {
 
 	dependencies {
 		implementation 'org.springframework.boot:spring-boot-starter-web:2.7.6'
+
 
 		testImplementation rootProject.sourceSets.main.output
 		testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.5'

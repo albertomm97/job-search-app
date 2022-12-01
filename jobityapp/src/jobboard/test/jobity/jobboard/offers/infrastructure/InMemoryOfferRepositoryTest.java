@@ -1,50 +1,45 @@
 package jobity.jobboard.offers.infrastructure;
 
+import jobity.apps.Starter;
 import jobity.jobboard.offers.domain.Offer;
 import jobity.jobboard.offers.domain.OfferId;
 import jobity.jobboard.offers.domain.OfferSalary;
 import jobity.jobboard.offers.domain.OfferTitle;
-import jobity.jobboard.offers.infrastructure.InMemoryOfferRepository;
+import jobity.jobboard.offers.infrastructure.persistence.InMemoryOfferRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ContextConfiguration(classes = Starter.class)
+@SpringBootTest
 class InMemoryOfferRepositoryTest {
+
+    @Autowired
+    private InMemoryOfferRepository repository;
+
+    private final Offer savedOffer = new Offer(
+            new OfferId("decf33ca-81a7-419f-a07a-74f214e928e5"),
+            new OfferTitle("title"),
+            new OfferSalary("324324")
+    );
 
     @Test
     void should_save_a_valid_offer() {
-        InMemoryOfferRepository repository = new InMemoryOfferRepository();
-
-        Offer offer = new Offer(
-                new OfferId("decf33ca-81a7-419f-a07a-74f214e928e5"),
-                new OfferTitle("title"),
-                new OfferSalary("324324")
-        );
-
-        repository.save(offer);
+        repository.save(savedOffer);
     }
 
     @Test
     void should_find_an_existing_offer() {
-        InMemoryOfferRepository repository = new InMemoryOfferRepository();
-
-        Offer offer = new Offer(
-                new OfferId("decf33ca-81a7-419f-a07a-74f214e928e5"),
-                new OfferTitle("title"),
-                new OfferSalary("324324")
-        );
-
-        repository.save(offer);
-
-        assertEquals(Optional.of(offer), repository.search(offer.id()));
+        assertEquals(Optional.of(savedOffer), repository.search(new OfferId("decf33ca-81a7-419f-a07a-74f214e928e5")));
     }
 
     @Test
     void should_not_find_a_non_existing_offer() {
-        InMemoryOfferRepository repository = new InMemoryOfferRepository();
-
-        assertFalse(repository.search(new OfferId("decf33ca-81a7-419f-a07a-74f214e928e5")).isPresent());
+        assertFalse(repository.search(new OfferId("decf33ca-81a7-419f-a07a-74f214e333e5")).isPresent());
     }
 }
