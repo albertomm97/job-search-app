@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-@Configuration
-@EnableTransactionManagement
+//@Configuration
+//@EnableTransactionManagement
 public class JobboardHibernateConfiguration {
     @Bean
     public LocalSessionFactoryBean sessionFactory() {

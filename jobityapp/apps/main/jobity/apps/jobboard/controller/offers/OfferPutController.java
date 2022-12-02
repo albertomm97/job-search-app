@@ -1,5 +1,8 @@
 package jobity.apps.jobboard.controller.offers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +22,16 @@ public class OfferPutController {
         this.offerCreator = offerCreator;
     }
 
+    @Operation(summary = "Creates a new offer")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Offer created"),
+            @ApiResponse(responseCode = "400", description = "Bad request")
+    })
     @PutMapping("/offers/{id}")
     public ResponseEntity<String> create(@PathVariable String id,
                                          @RequestBody Request request) {
+
+
 
         offerCreator.create(new CreateOfferRequest(id, request.getTitle(), request.getSalary()));
 
