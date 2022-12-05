@@ -5,10 +5,7 @@ import jobity.jobboard.offers.domain.OfferId;
 import jobity.jobboard.offers.domain.OfferRepository;
 import jobity.jobboard.offers.infrastructure.mapper.OfferMapper;
 import jobity.jobboard.offers.infrastructure.persistence.entity.OfferEntity;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component

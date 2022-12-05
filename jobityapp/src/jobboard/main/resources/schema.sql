@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS offers (
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    title VARCHAR(50) NOT NULL,
+    salary INT NOT NULL
+);
