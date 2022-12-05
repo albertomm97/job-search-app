@@ -1,16 +1,35 @@
 package jobity.jobboard.offers.application.create;
 
+import jobity.jobboard.shared.application.validation.ValidatedObject;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.*;
 import java.util.Objects;
 
-public class CreateOfferRequest {
-    private String id;
-    private String title;
-    private String salary;
+public class CreateOfferCommand extends ValidatedObject<CreateOfferCommand> {
 
-    public CreateOfferRequest(String id, String title, String salary) {
+    @NotEmpty
+    @NotBlank
+    @NotNull
+    @Size(min = 36, max = 36)
+    private String id;
+
+    @NotEmpty
+    @NotBlank
+    @NotNull
+    @Size(min = 10, max = 50)
+    private String title;
+
+    @Positive
+    @Max(value = 1000000000)
+    private Integer salary;
+
+    public CreateOfferCommand(String id, String title, Integer salary) {
         this.id = id;
         this.title = title;
         this.salary = salary;
+
+        this.validateSelf();
     }
 
     public String getId() {
@@ -21,7 +40,7 @@ public class CreateOfferRequest {
         return title;
     }
 
-    public String getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 
@@ -29,7 +48,7 @@ public class CreateOfferRequest {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CreateOfferRequest that = (CreateOfferRequest) o;
+        CreateOfferCommand that = (CreateOfferCommand) o;
         return Objects.equals(id, that.id) && Objects.equals(title, that.title) && Objects.equals(salary, that.salary);
     }
 

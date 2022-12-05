@@ -7,7 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.util.NestedServletException;
 
+import javax.validation.ConstraintViolationException;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,7 +25,7 @@ class OfferPutControllerTest {
 
     @Test
     void should_create_a_valid_offer() throws Exception {
-        String body = "{\"title\": \"The best course\", \"salary\": \"5\"}";
+        String body = "{\"title\": \"The best coursekjdsafksdf\", \"salary\": 1000}";
         String endpoint = "/offers/decf33ca-81a7-419f-a07a-74f214e928e5";
 
         mockMvc

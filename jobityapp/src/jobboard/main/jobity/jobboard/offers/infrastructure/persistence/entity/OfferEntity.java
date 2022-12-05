@@ -10,10 +10,10 @@ public class OfferEntity {
     @Id
     private String id;
     private String title;
-    private String salary;
+    private Integer salary;
 
     public OfferEntity() {}
-    public OfferEntity(String id, String title, String salary) {
+    public OfferEntity(String id, String title, Integer salary) {
         this.id = id;
         this.title = title;
         this.salary = salary;
@@ -35,11 +35,11 @@ public class OfferEntity {
         this.title = title;
     }
 
-    public String salary() {
+    public Integer salary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 }

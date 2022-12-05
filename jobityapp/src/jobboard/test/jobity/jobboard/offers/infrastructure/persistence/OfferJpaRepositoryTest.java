@@ -28,7 +28,7 @@ class OfferJpaRepositoryTest {
     private final Offer savedOffer = new Offer(
             new OfferId("decf33ca-81a7-419f-a07a-74f214e928e5"),
             new OfferTitle("title"),
-            new OfferSalary("324324")
+            new OfferSalary(45243)
     );
 
     @Test

@@ -1,6 +1,5 @@
 package jobity.jobboard.offers.application.create;
 
-import jobity.jobboard.offers.application.create.OfferCreator;
 import jobity.jobboard.offers.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ class OfferCreatorTest {
     @Test
     void should_save_a_valid_offer() throws Exception {
         // create request
-        CreateOfferRequest request = new CreateOfferRequest("decf33ca-81a7-419f-a07a-74f214e928e5", "title", "543");
+        CreateOfferCommand request = new CreateOfferCommand("decf33ca-81a7-419f-a07a-74f214e928e5", "titl32323e", 543);
 
         // create the offer
         Offer offer = new Offer(

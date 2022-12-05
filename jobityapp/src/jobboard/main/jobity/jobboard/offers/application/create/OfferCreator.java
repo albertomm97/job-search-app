@@ -12,7 +12,7 @@ public final class OfferCreator {
         this.offerRepository = offerRepository;
     }
 
-    public void create(CreateOfferRequest request) {
+    public void create(CreateOfferCommand request) {
         Offer offer = new Offer(
             new OfferId(request.getId()),
             new OfferTitle(request.getTitle()),

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jobity.jobboard.offers.application.create.OfferCreator;
-import jobity.jobboard.offers.application.create.CreateOfferRequest;
+import jobity.jobboard.offers.application.create.CreateOfferCommand;
 
 @RestController
 public class OfferPutController {
@@ -32,8 +32,7 @@ public class OfferPutController {
                                          @RequestBody Request request) {
 
 
-
-        offerCreator.create(new CreateOfferRequest(id, request.getTitle(), request.getSalary()));
+        offerCreator.create(new CreateOfferCommand(id, request.getTitle(), request.getSalary()));
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -41,13 +40,13 @@ public class OfferPutController {
 
 final class Request {
     private String title;
-    private String salary;
+    private Integer salary;
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 
@@ -55,7 +54,7 @@ final class Request {
         return title;
     }
 
-    public String getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 }
