@@ -1,6 +1,7 @@
 package jobity.apps.jobboard.error.offers;
 
 
+import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import jobity.jobboard.shared.infrastructure.error.AppError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

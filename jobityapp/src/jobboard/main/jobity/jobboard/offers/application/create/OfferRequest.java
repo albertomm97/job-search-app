@@ -1,68 +1,19 @@
-package jobity.jobboard.offers.infrastructure.persistence.entity;
+package jobity.jobboard.offers.application.create;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Objects;
 
-@Entity
-@Table(name = "offers")
-public class OfferEntity {
-    @Id
-    private String id;
+public final class OfferRequest {
+
     private String companyId;
     private String title;
     private String companyName;
-
-    @Column(name = "category")
     private String offerCategory;
-    @Column(name = "type")
     private String offerType;
-
-    @Column(name = "place")
     private String offerPlace;
     private Integer salary;
-
-    @Column(name = "experience")
     private Integer minimumExperience;
-
-    @Column(name = "study_level")
     private String minimumStudyLevel;
     private String description;
-
-    public OfferEntity() {}
-
-    public OfferEntity(String id,
-                       String companyId,
-                       String title,
-                       String companyName,
-                       String offerCategory,
-                       String offerType,
-                       String offerPlace,
-                       Integer salary,
-                       Integer minimumExperience,
-                       String minimumStudyLevel,
-                       String description) {
-        this.id = id;
-        this.companyId = companyId;
-        this.title = title;
-        this.companyName = companyName;
-        this.offerCategory = offerCategory;
-        this.offerType = offerType;
-        this.offerPlace = offerPlace;
-        this.salary = salary;
-        this.minimumExperience = minimumExperience;
-        this.minimumStudyLevel = minimumStudyLevel;
-        this.description = description;
-    }
-
-    public String id() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String companyId() {
         return companyId;
@@ -70,6 +21,14 @@ public class OfferEntity {
 
     public void setCompanyId(String companyId) {
         this.companyId = companyId;
+    }
+
+    public String description() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String title() {
@@ -136,11 +95,16 @@ public class OfferEntity {
         this.minimumStudyLevel = minimumStudyLevel;
     }
 
-    public String description() {
-        return description;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OfferRequest that = (OfferRequest) o;
+        return companyId.equals(that.companyId) && title.equals(that.title) && companyName.equals(that.companyName) && offerCategory.equals(that.offerCategory) && offerType.equals(that.offerType) && offerPlace.equals(that.offerPlace) && salary.equals(that.salary) && minimumExperience.equals(that.minimumExperience) && minimumStudyLevel.equals(that.minimumStudyLevel) && description.equals(that.description);
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    @Override
+    public int hashCode() {
+        return Objects.hash(companyId, title, companyName, offerCategory, offerType, offerPlace, salary, minimumExperience, minimumStudyLevel, description);
     }
 }
