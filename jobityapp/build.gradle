@@ -30,7 +30,7 @@ allprojects {
 		//implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
 
 		implementation 'org.springframework.boot:spring-boot-starter-web:2.7.6'
-		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 		implementation 'mysql:mysql-connector-java:8.0.30'
 
 		// Test

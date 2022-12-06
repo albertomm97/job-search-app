@@ -9,7 +9,6 @@ public class Offer {
     private final OfferId id;
     private final CompanyId companyId;
     private final OfferTitle title;
-    private final CompanyName companyName;
     private final OfferCategory category;
     private final OfferType offerType;
     private final OfferPlace offerPlace;
@@ -21,7 +20,6 @@ public class Offer {
     public Offer(OfferId id,
                  CompanyId companyId,
                  OfferTitle title,
-                 CompanyName companyName,
                  OfferCategory category,
                  OfferType offerType,
                  OfferPlace offerPlace,
@@ -32,7 +30,6 @@ public class Offer {
         this.id = id;
         this.companyId = companyId;
         this.title = title;
-        this.companyName = companyName;
         this.category = category;
         this.offerType = offerType;
         this.offerPlace = offerPlace;
@@ -52,10 +49,6 @@ public class Offer {
 
     public OfferTitle title() {
         return title;
-    }
-
-    public CompanyName companyName() {
-        return companyName;
     }
 
     public OfferCategory category() {
@@ -91,11 +84,11 @@ public class Offer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Offer offer = (Offer) o;
-        return id.equals(offer.id) && title.equals(offer.title) && companyName.equals(offer.companyName) && category.equals(offer.category) && offerType.equals(offer.offerType) && offerPlace.equals(offer.offerPlace) && salary.equals(offer.salary) && offerExperience.equals(offer.offerExperience) && offerStudyLevel.equals(offer.offerStudyLevel) && description.equals(offer.description);
+        return id.equals(offer.id) && title.equals(offer.title) && category.equals(offer.category) && offerType.equals(offer.offerType) && offerPlace.equals(offer.offerPlace) && salary.equals(offer.salary) && offerExperience.equals(offer.offerExperience) && offerStudyLevel.equals(offer.offerStudyLevel) && description.equals(offer.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, companyName, category, offerType, offerPlace, salary, offerExperience, offerStudyLevel, description);
+        return Objects.hash(id, title, category, offerType, offerPlace, salary, offerExperience, offerStudyLevel, description);
     }
 }

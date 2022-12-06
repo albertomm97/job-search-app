@@ -5,7 +5,7 @@ import jobity.jobboard.shared.application.validation.ValidatedObject;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
-public class CreateOfferCommand extends ValidatedObject<CreateOfferCommand> {
+public final class CreateOfferCommand extends ValidatedObject<CreateOfferCommand> {
 
     @NotBlank
     @Size(min = 36, max = 36)
@@ -18,10 +18,6 @@ public class CreateOfferCommand extends ValidatedObject<CreateOfferCommand> {
     @NotBlank
     @Size(min = 10, max = 50)
     private String title;
-
-    @NotBlank
-    @Size(min = 3, max = 80)
-    private String companyName;
 
     @NotBlank
     @Size(min = 3, max = 40)
@@ -54,7 +50,6 @@ public class CreateOfferCommand extends ValidatedObject<CreateOfferCommand> {
     public CreateOfferCommand(String id,
                               String companyId,
                               String title,
-                              String companyName,
                               String offerCategory,
                               String offerType,
                               String offerPlace,
@@ -65,7 +60,6 @@ public class CreateOfferCommand extends ValidatedObject<CreateOfferCommand> {
         this.id = id;
         this.companyId = companyId;
         this.title = title;
-        this.companyName = companyName;
         this.offerCategory = offerCategory;
         this.offerType = offerType;
         this.offerPlace = offerPlace;
@@ -81,7 +75,6 @@ public class CreateOfferCommand extends ValidatedObject<CreateOfferCommand> {
         this.id = id;
         this.companyId = request.companyId();
         this.title = request.title();
-        this.companyName = request.companyName();
         this.offerCategory = request.offerCategory();
         this.offerType = request.offerType();
         this.offerPlace = request.offerPlace();
@@ -115,14 +108,6 @@ public class CreateOfferCommand extends ValidatedObject<CreateOfferCommand> {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String companyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
     }
 
     public String offerCategory() {
@@ -186,11 +171,11 @@ public class CreateOfferCommand extends ValidatedObject<CreateOfferCommand> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CreateOfferCommand that = (CreateOfferCommand) o;
-        return id.equals(that.id) && companyId.equals(that.companyId) && title.equals(that.title) && companyName.equals(that.companyName) && offerCategory.equals(that.offerCategory) && offerType.equals(that.offerType) && offerPlace.equals(that.offerPlace) && salary.equals(that.salary) && minimumExperience.equals(that.minimumExperience) && minimumStudyLevel.equals(that.minimumStudyLevel) && description.equals(that.description);
+        return id.equals(that.id) && companyId.equals(that.companyId) && title.equals(that.title) && offerCategory.equals(that.offerCategory) && offerType.equals(that.offerType) && offerPlace.equals(that.offerPlace) && salary.equals(that.salary) && minimumExperience.equals(that.minimumExperience) && minimumStudyLevel.equals(that.minimumStudyLevel) && description.equals(that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, companyId, title, companyName, offerCategory, offerType, offerPlace, salary, minimumExperience, minimumStudyLevel, description);
+        return Objects.hash(id, companyId, title, offerCategory, offerType, offerPlace, salary, minimumExperience, minimumStudyLevel, description);
     }
 }

@@ -2,7 +2,7 @@ package jobity.jobboard.offers.domain;
 
 import jobity.shared.domain.ValueObject;
 
-public class OfferExperience extends ValueObject<Integer> {
+public final class OfferExperience extends ValueObject<Integer> {
     public OfferExperience(Integer value) {
         super(value);
     }

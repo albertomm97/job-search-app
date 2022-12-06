@@ -3,12 +3,12 @@ package jobity.jobboard.offers.infrastructure.mapper;
 import jobity.jobboard.companies.domain.CompanyId;
 import jobity.jobboard.companies.domain.CompanyName;
 import jobity.jobboard.offers.domain.*;
-import jobity.jobboard.offers.infrastructure.persistence.entity.OfferEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OfferMapper {
+public final class OfferMapper {
 
+    /*
     public OfferEntity offerToOfferEntity(Offer offer) {
         return new OfferEntity(
                 offer.id().value(),
@@ -40,4 +40,6 @@ public class OfferMapper {
                 new OfferDescription(offer.description())
         );
     }
+
+     */
 }

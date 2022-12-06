@@ -14,7 +14,7 @@ class OfferCreatorTest {
     @BeforeEach
     protected void setUp() {
         repository = mock(OfferRepository.class);
-        creator = new OfferCreator(repository);
+        creator = new OfferCreatorService(repository);
     }
 
     @Test
