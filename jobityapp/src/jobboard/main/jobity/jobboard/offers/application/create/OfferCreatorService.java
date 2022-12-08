@@ -6,6 +6,8 @@ import jobity.jobboard.offers.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 public class OfferCreatorService implements OfferCreator {
     private final OfferRepository offerRepository;
@@ -23,6 +25,7 @@ public class OfferCreatorService implements OfferCreator {
                 new OfferSalary(command.salary()),
                 new OfferExperience(command.minimumExperience()),
                 new OfferDescription(command.description()),
+                LocalDateTime.now(),
                 command.categories()
         );
 

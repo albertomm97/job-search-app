@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class DbOfferRepository implements OfferRepository {
-
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     public DbOfferRepository(NamedParameterJdbcTemplate jdbcTemplate) {
@@ -30,6 +29,7 @@ public class DbOfferRepository implements OfferRepository {
                 .addValue("salary", offer.salary().value())
                 .addValue("experience", offer.offerExperience().value())
                 .addValue("description", offer.description().value())
+                .addValue("created_at", offer.createdAt())
                 .getValues();
 
         var categoryValues = offer.categories().stream()
@@ -43,7 +43,7 @@ public class DbOfferRepository implements OfferRepository {
         String offerInsert =
                 "INSERT INTO offers " +
                 "(id, company_id, title, salary, experience, description, created_at) " +
-                "VALUES (:id, :company_id, :title, :salary, :experience, :description, CURRENT_TIMESTAMP())";
+                "VALUES (:id, :company_id, :title, :salary, :experience, :description, :created_at)";
         jdbcTemplate.update(offerInsert, offerParams);
 
         String categoryInsert =
@@ -55,48 +55,54 @@ public class DbOfferRepository implements OfferRepository {
     }
 
     @Override
-    public Offer search(OfferId id) {
-
+    public Offer findById(OfferId id) {
         var params = new MapSqlParameterSource()
                 .addValue("id", id.value())
                 .getValues();
 
         String offerSql =
-                "SELECT o.id, o.company_id, o.title, o.salary, o.experience, o.description " +
+                "SELECT o.*, GROUP_CONCAT(c.type) AS category_type, GROUP_CONCAT(c.value) AS category_value " +
                 "FROM offers o " +
-                "WHERE o.id = :id";
+                "LEFT JOIN offers_categories oc ON o.id = oc.offer_id " +
+                "LEFT JOIN categories c ON c.id = oc.category_id " +
+                "WHERE o.id = :id " +
+                "GROUP BY o.id ";
 
-        Offer offer = jdbcTemplate.queryForObject(offerSql, params, (resultSet, i) -> {
-            return new Offer(
-                    id,
-                    new CompanyId(resultSet.getString("company_id")),
-                    new OfferTitle(resultSet.getString("title")),
-                    new OfferSalary(resultSet.getInt("salary")),
-                    new OfferExperience(resultSet.getInt("experience")),
-                    new OfferDescription(resultSet.getString("description"))
-            );
-        });
+        Offer offer = jdbcTemplate.queryForObject(offerSql, params, new OfferRowMapper());
 
         if (offer == null) {
             throw new RuntimeException();
         }
 
-        String categoriesSql =
-                "SELECT c.type, c.value " +
+        return offer;
+    }
+
+    @Override
+    public List<Offer> findByCompanyId(CompanyId id) {
+        var params = new MapSqlParameterSource()
+                .addValue("id", id.value())
+                .getValues();
+
+        String offerSql =
+                "SELECT o.*, GROUP_CONCAT(c.type) AS category_type, GROUP_CONCAT(c.value) AS category_value " +
                 "FROM offers o " +
                 "LEFT JOIN offers_categories oc ON o.id = oc.offer_id " +
                 "LEFT JOIN categories c ON c.id = oc.category_id " +
-                "WHERE o.id = :id";
+                "WHERE o.company_id = :id " +
+                "GROUP BY o.id ";
 
-        List<Category> categories = jdbcTemplate.query(offerSql, params, (resultSet, i) -> {
-            return new Category(
-                    resultSet.getString("value"),
-                    resultSet.getString("type")
-            );
-        });
+        List<Offer> offers = jdbcTemplate.query(offerSql, params, new OfferRowMapper());
 
-        offer.setCategories(categories);
+        if (offers.isEmpty()) {
+            throw new RuntimeException();
+        }
 
-        return offer;
+        return offers;
     }
+
+    @Override
+    public List<Offer> findByFilter() {
+        return null;
+    }
+
 }

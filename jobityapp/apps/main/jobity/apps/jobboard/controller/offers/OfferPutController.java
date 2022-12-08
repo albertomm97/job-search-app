@@ -30,7 +30,7 @@ public class OfferPutController {
             @ApiResponse(responseCode = "400", description = "Bad request")
     })
     @PutMapping("/offers/{id}")
-    public ResponseEntity<String> create(@PathVariable String id,
+    public ResponseEntity<Void> create(@PathVariable String id,
                                          @RequestBody OfferRequest request) {
 
         offerCreator.create(new CreateOfferCommand(id, request));

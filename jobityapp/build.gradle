@@ -18,6 +18,7 @@ allprojects {
 		implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
 		implementation 'com.vlkan.log4j2:log4j2-logstash-layout:1.0.5'
 		implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+		implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
 
 		// Hibernate
 		//implementation 'org.hibernate:hibernate-core:6.1.5.Final'

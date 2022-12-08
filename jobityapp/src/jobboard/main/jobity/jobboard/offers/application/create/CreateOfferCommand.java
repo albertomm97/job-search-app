@@ -35,6 +35,8 @@ public final class CreateOfferCommand extends ValidatedObject<CreateOfferCommand
 
     private List<Category> categories;
 
+    public CreateOfferCommand() {}
+
     public CreateOfferCommand(String id,
                               String companyId,
                               String title,
@@ -60,6 +62,8 @@ public final class CreateOfferCommand extends ValidatedObject<CreateOfferCommand
         this.minimumExperience = request.minimumExperience();
         this.description = request.description();
         this.categories = request.categories();
+
+        this.validateSelf();
     }
 
     public String id() {

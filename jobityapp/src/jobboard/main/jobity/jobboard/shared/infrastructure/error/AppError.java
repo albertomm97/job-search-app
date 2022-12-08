@@ -41,6 +41,7 @@ public class AppError {
 
     private AppError() {
         this.timestamp = LocalDateTime.now();
+        errors = new ArrayList<>();
     }
 
     public AppError(HttpStatus status) {
@@ -48,17 +49,20 @@ public class AppError {
         this.status = status;
     }
 
-    public AppError(HttpStatus status, Throwable exception) {
+    public AppError(HttpStatus status, String message) {
         this();
         this.status = status;
+        this.message = message;
+    }
+
+    public AppError(HttpStatus status, Throwable exception) {
+        this(status);
         this.message = "Unexpected Error";
         this.debugMessage = exception.getLocalizedMessage();
     }
 
-    public AppError(HttpStatus status, Throwable exception, String message) {
-        this();
-        this.status = status;
-        this.message = message;
+    public AppError(HttpStatus status, String message, Throwable exception) {
+        this(status, message);
         this.debugMessage = exception.getLocalizedMessage();
     }
 
@@ -119,9 +123,6 @@ public class AppError {
     }
 
     private void addSubError(String subError) {
-        if (errors == null) {
-            errors = new ArrayList<>();
-        }
         errors.add(subError);
     }
 }

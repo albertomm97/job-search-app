@@ -1,4 +1,3 @@
-/*
 INSERT INTO categories (value, type) VALUES
 ('Backend', 'category'), ('Fullstack', 'category'), ('Frontend', 'category'), ('Sysadmin', 'category'), ('Analyst', 'category'),
 ('Remote', 'type'), ('Hybrid', 'type'), ('Office', 'type'),
@@ -7,14 +6,11 @@ INSERT INTO categories (value, type) VALUES
 ('Master', 'study_level'), ('Phd', 'study_level'), ('Full Time', 'work_time'), ('Part Time', 'work_time');
 
 
-INSERT INTO categories VALUES
-('Backend', 'Fullstack', 'Frontend', 'Sysadmin', 'Analyst', 'Remote', 'Hybrid', 'Office',
-'Alicante', 'Valencia', 'Madrid', 'Barcelona', 'Nothing', 'Elementary', 'High School', 'Degree',
-'Master', 'Phd', 'Full Time', 'Part Time');
+
+/*
 
 
 INSERT INTO companies (id, email, name, description) VALUES ('decf33ca-81a7-419f-a07a-74f214e928e5', 'intel@gmail.com', 'Intel', 'Software company');
-
 
 INSERT INTO offers (id,
                     company_id,
