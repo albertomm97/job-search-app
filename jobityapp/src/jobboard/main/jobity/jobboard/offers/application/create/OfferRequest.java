@@ -1,5 +1,8 @@
 package jobity.jobboard.offers.application.create;
 
+import jobity.jobboard.shared.domain.Category;
+
+import java.util.List;
 import java.util.Objects;
 
 public final class OfferRequest {
@@ -7,14 +10,10 @@ public final class OfferRequest {
     private String companyId;
     private String title;
     private String companyName;
-    private String offerCategory;
-    private String offerType;
-    private String offerPlace;
-    private String minimumStudyLevel;
-    private String offerWorkTime;
     private Integer salary;
     private Integer minimumExperience;
     private String description;
+    private List<Category> categories;
 
     public String companyId() {
         return companyId;
@@ -38,46 +37,6 @@ public final class OfferRequest {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
-    }
-
-    public String offerCategory() {
-        return offerCategory;
-    }
-
-    public void setOfferCategory(String offerCategory) {
-        this.offerCategory = offerCategory;
-    }
-
-    public String offerType() {
-        return offerType;
-    }
-
-    public void setOfferType(String offerType) {
-        this.offerType = offerType;
-    }
-
-    public String offerPlace() {
-        return offerPlace;
-    }
-
-    public void setOfferPlace(String offerPlace) {
-        this.offerPlace = offerPlace;
-    }
-
-    public String minimumStudyLevel() {
-        return minimumStudyLevel;
-    }
-
-    public void setMinimumStudyLevel(String minimumStudyLevel) {
-        this.minimumStudyLevel = minimumStudyLevel;
-    }
-
-    public String offerWorkTime() {
-        return offerWorkTime;
-    }
-
-    public void setOfferWorkTime(String offerWorkTime) {
-        this.offerWorkTime = offerWorkTime;
     }
 
     public Integer salary() {
@@ -104,16 +63,24 @@ public final class OfferRequest {
         this.description = description;
     }
 
+    public List<Category> categories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OfferRequest that = (OfferRequest) o;
-        return companyId.equals(that.companyId) && title.equals(that.title) && companyName.equals(that.companyName) && offerCategory.equals(that.offerCategory) && offerType.equals(that.offerType) && offerPlace.equals(that.offerPlace) && minimumStudyLevel.equals(that.minimumStudyLevel) && offerWorkTime.equals(that.offerWorkTime) && salary.equals(that.salary) && minimumExperience.equals(that.minimumExperience) && description.equals(that.description);
+        return companyId.equals(that.companyId) && title.equals(that.title) && companyName.equals(that.companyName) && salary.equals(that.salary) && minimumExperience.equals(that.minimumExperience) && description.equals(that.description) && categories.equals(that.categories);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(companyId, title, companyName, offerCategory, offerType, offerPlace, minimumStudyLevel, offerWorkTime, salary, minimumExperience, description);
+        return Objects.hash(companyId, title, companyName, salary, minimumExperience, description, categories);
     }
 }

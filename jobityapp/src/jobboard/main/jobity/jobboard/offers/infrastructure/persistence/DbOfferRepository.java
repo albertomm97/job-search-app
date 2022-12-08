@@ -1,14 +1,15 @@
 package jobity.jobboard.offers.infrastructure.persistence;
 
 import jobity.jobboard.companies.domain.CompanyId;
-import jobity.jobboard.offers.domain.Offer;
-import jobity.jobboard.offers.domain.OfferId;
-import jobity.jobboard.offers.domain.OfferRepository;
-import jobity.jobboard.offers.domain.OfferTitle;
+import jobity.jobboard.offers.domain.*;
+import jobity.jobboard.shared.domain.Category;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class DbOfferRepository implements OfferRepository {
@@ -28,17 +29,15 @@ public class DbOfferRepository implements OfferRepository {
                 .addValue("title", offer.title().value())
                 .addValue("salary", offer.salary().value())
                 .addValue("experience", offer.offerExperience().value())
-                .addValue("category", offer.category().value())
                 .addValue("description", offer.description().value())
                 .getValues();
 
+        var categoryValues = offer.categories().stream()
+                .collect(Collectors.toMap(Category::type, Category::value));
+
         var categoryParams = new MapSqlParameterSource()
                 .addValue("offer_id", offer.id().value())
-                .addValue("category", offer.category().value())
-                .addValue("type", offer.offerType().value())
-                .addValue("place", offer.offerPlace().value())
-                .addValue("study_level", offer.offerStudyLevel().value())
-                .addValue("work_time", offer.offerWorkTime().value())
+                .addValues(categoryValues)
                 .getValues();
 
         String offerInsert =
@@ -62,13 +61,42 @@ public class DbOfferRepository implements OfferRepository {
                 .addValue("id", id.value())
                 .getValues();
 
-        String sql =
-                "SELECT * FROM offers o WHERE o.id = :id";
+        String offerSql =
+                "SELECT o.id, o.company_id, o.title, o.salary, o.experience, o.description " +
+                "FROM offers o " +
+                "WHERE o.id = :id";
 
-        Offer offer = jdbcTemplate.queryForObject(sql, params, (resultSet, i) -> {
-            return null;
+        Offer offer = jdbcTemplate.queryForObject(offerSql, params, (resultSet, i) -> {
+            return new Offer(
+                    id,
+                    new CompanyId(resultSet.getString("company_id")),
+                    new OfferTitle(resultSet.getString("title")),
+                    new OfferSalary(resultSet.getInt("salary")),
+                    new OfferExperience(resultSet.getInt("experience")),
+                    new OfferDescription(resultSet.getString("description"))
+            );
         });
 
-        return null;
+        if (offer == null) {
+            throw new RuntimeException();
+        }
+
+        String categoriesSql =
+                "SELECT c.type, c.value " +
+                "FROM offers o " +
+                "LEFT JOIN offers_categories oc ON o.id = oc.offer_id " +
+                "LEFT JOIN categories c ON c.id = oc.category_id " +
+                "WHERE o.id = :id";
+
+        List<Category> categories = jdbcTemplate.query(offerSql, params, (resultSet, i) -> {
+            return new Category(
+                    resultSet.getString("value"),
+                    resultSet.getString("type")
+            );
+        });
+
+        offer.setCategories(categories);
+
+        return offer;
     }
 }

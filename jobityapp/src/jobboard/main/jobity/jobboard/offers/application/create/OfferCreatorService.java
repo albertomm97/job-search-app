@@ -20,14 +20,10 @@ public class OfferCreatorService implements OfferCreator {
                 new OfferId(command.id()),
                 new CompanyId(command.companyId()),
                 new OfferTitle(command.title()),
-                new OfferCategory(command.offerCategory()),
-                new OfferType(command.offerType()),
-                new OfferPlace(command.offerPlace()),
-                new OfferStudyLevel(command.minimumStudyLevel()),
-                new OfferWorkTime(command.offerWorkTime()),
                 new OfferSalary(command.salary()),
                 new OfferExperience(command.minimumExperience()),
-                new OfferDescription(command.description())
+                new OfferDescription(command.description()),
+                command.categories()
         );
 
         offerRepository.save(offer);
