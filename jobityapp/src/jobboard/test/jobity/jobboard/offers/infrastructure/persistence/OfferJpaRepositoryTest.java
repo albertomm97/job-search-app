@@ -41,7 +41,7 @@ class OfferJpaRepositoryTest {
         repository.save(mapper.offerToOfferEntity(savedOffer));
         OfferEntity offer = repository.findById("decf33ca-81a7-419f-a07a-74f214e928e5").get();
 
-        assertEquals(offer.id(), savedOffer.id().value());
+        assertEquals(offer.id().value(), savedOffer.id().value());
     }
 
     @Test

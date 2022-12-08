@@ -10,9 +10,10 @@ public final class OfferRequest {
     private String offerCategory;
     private String offerType;
     private String offerPlace;
+    private String minimumStudyLevel;
+    private String offerWorkTime;
     private Integer salary;
     private Integer minimumExperience;
-    private String minimumStudyLevel;
     private String description;
 
     public String companyId() {
@@ -21,14 +22,6 @@ public final class OfferRequest {
 
     public void setCompanyId(String companyId) {
         this.companyId = companyId;
-    }
-
-    public String description() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String title() {
@@ -71,6 +64,22 @@ public final class OfferRequest {
         this.offerPlace = offerPlace;
     }
 
+    public String minimumStudyLevel() {
+        return minimumStudyLevel;
+    }
+
+    public void setMinimumStudyLevel(String minimumStudyLevel) {
+        this.minimumStudyLevel = minimumStudyLevel;
+    }
+
+    public String offerWorkTime() {
+        return offerWorkTime;
+    }
+
+    public void setOfferWorkTime(String offerWorkTime) {
+        this.offerWorkTime = offerWorkTime;
+    }
+
     public Integer salary() {
         return salary;
     }
@@ -87,12 +96,12 @@ public final class OfferRequest {
         this.minimumExperience = minimumExperience;
     }
 
-    public String minimumStudyLevel() {
-        return minimumStudyLevel;
+    public String description() {
+        return description;
     }
 
-    public void setMinimumStudyLevel(String minimumStudyLevel) {
-        this.minimumStudyLevel = minimumStudyLevel;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -100,11 +109,11 @@ public final class OfferRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OfferRequest that = (OfferRequest) o;
-        return companyId.equals(that.companyId) && title.equals(that.title) && companyName.equals(that.companyName) && offerCategory.equals(that.offerCategory) && offerType.equals(that.offerType) && offerPlace.equals(that.offerPlace) && salary.equals(that.salary) && minimumExperience.equals(that.minimumExperience) && minimumStudyLevel.equals(that.minimumStudyLevel) && description.equals(that.description);
+        return companyId.equals(that.companyId) && title.equals(that.title) && companyName.equals(that.companyName) && offerCategory.equals(that.offerCategory) && offerType.equals(that.offerType) && offerPlace.equals(that.offerPlace) && minimumStudyLevel.equals(that.minimumStudyLevel) && offerWorkTime.equals(that.offerWorkTime) && salary.equals(that.salary) && minimumExperience.equals(that.minimumExperience) && description.equals(that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(companyId, title, companyName, offerCategory, offerType, offerPlace, salary, minimumExperience, minimumStudyLevel, description);
+        return Objects.hash(companyId, title, companyName, offerCategory, offerType, offerPlace, minimumStudyLevel, offerWorkTime, salary, minimumExperience, description);
     }
 }

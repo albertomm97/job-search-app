@@ -1,7 +1,6 @@
 package jobity.jobboard.offers.domain;
 
 import jobity.jobboard.companies.domain.CompanyId;
-import jobity.jobboard.companies.domain.CompanyName;
 
 import java.util.Objects;
 
@@ -12,9 +11,10 @@ public class Offer {
     private final OfferCategory category;
     private final OfferType offerType;
     private final OfferPlace offerPlace;
+    private final OfferStudyLevel offerStudyLevel;
+    private final OfferWorkTime offerWorkTime;
     private final OfferSalary salary;
     private final OfferExperience offerExperience;
-    private final OfferStudyLevel offerStudyLevel;
     private final OfferDescription description;
 
     public Offer(OfferId id,
@@ -23,9 +23,10 @@ public class Offer {
                  OfferCategory category,
                  OfferType offerType,
                  OfferPlace offerPlace,
+                 OfferStudyLevel offerStudyLevel,
+                 OfferWorkTime offerWorkTime,
                  OfferSalary salary,
                  OfferExperience offerExperience,
-                 OfferStudyLevel offerStudyLevel,
                  OfferDescription description) {
         this.id = id;
         this.companyId = companyId;
@@ -33,9 +34,10 @@ public class Offer {
         this.category = category;
         this.offerType = offerType;
         this.offerPlace = offerPlace;
+        this.offerStudyLevel = offerStudyLevel;
+        this.offerWorkTime = offerWorkTime;
         this.salary = salary;
         this.offerExperience = offerExperience;
-        this.offerStudyLevel = offerStudyLevel;
         this.description = description;
     }
 
@@ -63,16 +65,20 @@ public class Offer {
         return offerPlace;
     }
 
+    public OfferStudyLevel offerStudyLevel() {
+        return offerStudyLevel;
+    }
+
+    public OfferWorkTime offerWorkTime() {
+        return offerWorkTime;
+    }
+
     public OfferSalary salary() {
         return salary;
     }
 
     public OfferExperience offerExperience() {
         return offerExperience;
-    }
-
-    public OfferStudyLevel offerStudyLevel() {
-        return offerStudyLevel;
     }
 
     public OfferDescription description() {
@@ -84,11 +90,11 @@ public class Offer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Offer offer = (Offer) o;
-        return id.equals(offer.id) && title.equals(offer.title) && category.equals(offer.category) && offerType.equals(offer.offerType) && offerPlace.equals(offer.offerPlace) && salary.equals(offer.salary) && offerExperience.equals(offer.offerExperience) && offerStudyLevel.equals(offer.offerStudyLevel) && description.equals(offer.description);
+        return id.equals(offer.id) && companyId.equals(offer.companyId) && title.equals(offer.title) && category.equals(offer.category) && offerType.equals(offer.offerType) && offerPlace.equals(offer.offerPlace) && offerStudyLevel.equals(offer.offerStudyLevel) && offerWorkTime.equals(offer.offerWorkTime) && salary.equals(offer.salary) && offerExperience.equals(offer.offerExperience) && description.equals(offer.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, category, offerType, offerPlace, salary, offerExperience, offerStudyLevel, description);
+        return Objects.hash(id, companyId, title, category, offerType, offerPlace, offerStudyLevel, offerWorkTime, salary, offerExperience, description);
     }
 }

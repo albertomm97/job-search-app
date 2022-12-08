@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public final class OfferCreatorService implements OfferCreator {
+public class OfferCreatorService implements OfferCreator {
     private final OfferRepository offerRepository;
 
     public OfferCreatorService(OfferRepository offerRepository) {
@@ -23,9 +23,10 @@ public final class OfferCreatorService implements OfferCreator {
                 new OfferCategory(command.offerCategory()),
                 new OfferType(command.offerType()),
                 new OfferPlace(command.offerPlace()),
+                new OfferStudyLevel(command.minimumStudyLevel()),
+                new OfferWorkTime(command.offerWorkTime()),
                 new OfferSalary(command.salary()),
                 new OfferExperience(command.minimumExperience()),
-                new OfferStudyLevel(command.minimumStudyLevel()),
                 new OfferDescription(command.description())
         );
 

@@ -5,51 +5,29 @@ CREATE TABLE IF NOT EXISTS companies (
     description VARCHAR(2500) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS offer_category (
+CREATE TABLE IF NOT EXISTS categories (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    category VARCHAR(25) NOT NULL
+    value VARCHAR(20) NOT NULL,
+    type VARCHAR(15) NOT NULL
 );
-
-CREATE TABLE IF NOT EXISTS offer_type (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    type VARCHAR(25) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS offer_place (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    place VARCHAR(25) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS offer_study_level (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    study VARCHAR(25) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS offer_work_time (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    work_time VARCHAR(25) NOT NULL
-);
-
 
 CREATE TABLE IF NOT EXISTS offers (
     id VARCHAR(36) NOT NULL PRIMARY KEY,
     company_id VARCHAR(36) NOT NULL,
     title VARCHAR(50) NOT NULL,
-    category INT,
-    type INT,
-    place INT,
-    study_level INT,
-    work_time INT,
     salary INT,
     experience INT,
     description VARCHAR(2500) NOT NULL,
     created_at TIMESTAMP NOT NULL,
-    FOREIGN KEY(company_id) REFERENCES companies(id) ON DELETE CASCADE,
-    FOREIGN KEY(category) REFERENCES offer_category(id) ON DELETE SET NULL,
-    FOREIGN KEY(type) REFERENCES offer_type(id) ON DELETE SET NULL,
-    FOREIGN KEY(place) REFERENCES offer_place(id) ON DELETE SET NULL,
-    FOREIGN KEY(study_level) REFERENCES offer_study_level(id) ON DELETE SET NULL,
-    FOREIGN KEY(work_time) REFERENCES offer_work_time(id) ON DELETE SET NULL
+    FOREIGN KEY(company_id) REFERENCES companies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS offers_categories (
+    offer_id VARCHAR(36) NOT NULL,
+    category_id INT NOT NULL,
+    FOREIGN KEY(offer_id) REFERENCES offers(id) ON DELETE CASCADE,
+    FOREIGN KEY(category_id) REFERENCES categories(id) ON DELETE CASCADE,
+    PRIMARY KEY(offer_id, category_id)
 );
 
 CREATE TABLE IF NOT EXISTS users (

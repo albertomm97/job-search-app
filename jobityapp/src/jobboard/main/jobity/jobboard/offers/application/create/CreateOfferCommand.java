@@ -20,16 +20,19 @@ public final class CreateOfferCommand extends ValidatedObject<CreateOfferCommand
     private String title;
 
     @NotBlank
-    @Size(min = 3, max = 40)
     private String offerCategory;
 
     @NotBlank
-    @Size(min = 3, max = 40)
     private String offerType;
 
     @NotBlank
-    @Size(min = 3, max = 40)
     private String offerPlace;
+
+    @NotBlank
+    private String minimumStudyLevel;
+
+    @NotBlank
+    private String offerWorkTime;
 
     @Positive
     @Max(value = 100000000)
@@ -38,10 +41,6 @@ public final class CreateOfferCommand extends ValidatedObject<CreateOfferCommand
     @Positive
     @Max(value = 50)
     private Integer minimumExperience;
-
-    @NotBlank
-    @Size(min = 10, max = 40)
-    private String minimumStudyLevel;
 
     @NotBlank
     @Size(min = 10, max = 2500)
@@ -53,9 +52,10 @@ public final class CreateOfferCommand extends ValidatedObject<CreateOfferCommand
                               String offerCategory,
                               String offerType,
                               String offerPlace,
+                              String minimumStudyLevel,
+                              String offerWorkTime,
                               Integer salary,
                               Integer minimumExperience,
-                              String minimumStudyLevel,
                               String description) {
         this.id = id;
         this.companyId = companyId;
@@ -63,27 +63,26 @@ public final class CreateOfferCommand extends ValidatedObject<CreateOfferCommand
         this.offerCategory = offerCategory;
         this.offerType = offerType;
         this.offerPlace = offerPlace;
+        this.minimumStudyLevel = minimumStudyLevel;
+        this.offerWorkTime = offerWorkTime;
         this.salary = salary;
         this.minimumExperience = minimumExperience;
-        this.minimumStudyLevel = minimumStudyLevel;
         this.description = description;
-
-        this.validateSelf();
     }
 
-    public CreateOfferCommand(String id, OfferRequest request) {
+    public CreateOfferCommand(String id,
+                              OfferRequest request) {
         this.id = id;
         this.companyId = request.companyId();
         this.title = request.title();
         this.offerCategory = request.offerCategory();
         this.offerType = request.offerType();
         this.offerPlace = request.offerPlace();
+        this.minimumStudyLevel = request.minimumStudyLevel();
+        this.offerWorkTime = request.offerWorkTime();
         this.salary = request.salary();
         this.minimumExperience = request.minimumExperience();
-        this.minimumStudyLevel = request.minimumStudyLevel();
         this.description = request.description();
-
-        this.validateSelf();
     }
 
     public String id() {
@@ -134,6 +133,22 @@ public final class CreateOfferCommand extends ValidatedObject<CreateOfferCommand
         this.offerPlace = offerPlace;
     }
 
+    public String minimumStudyLevel() {
+        return minimumStudyLevel;
+    }
+
+    public void setMinimumStudyLevel(String minimumStudyLevel) {
+        this.minimumStudyLevel = minimumStudyLevel;
+    }
+
+    public String offerWorkTime() {
+        return offerWorkTime;
+    }
+
+    public void setOfferWorkTime(String offerWorkTime) {
+        this.offerWorkTime = offerWorkTime;
+    }
+
     public Integer salary() {
         return salary;
     }
@@ -150,14 +165,6 @@ public final class CreateOfferCommand extends ValidatedObject<CreateOfferCommand
         this.minimumExperience = minimumExperience;
     }
 
-    public String minimumStudyLevel() {
-        return minimumStudyLevel;
-    }
-
-    public void setMinimumStudyLevel(String minimumStudyLevel) {
-        this.minimumStudyLevel = minimumStudyLevel;
-    }
-
     public String description() {
         return description;
     }
@@ -171,11 +178,11 @@ public final class CreateOfferCommand extends ValidatedObject<CreateOfferCommand
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CreateOfferCommand that = (CreateOfferCommand) o;
-        return id.equals(that.id) && companyId.equals(that.companyId) && title.equals(that.title) && offerCategory.equals(that.offerCategory) && offerType.equals(that.offerType) && offerPlace.equals(that.offerPlace) && salary.equals(that.salary) && minimumExperience.equals(that.minimumExperience) && minimumStudyLevel.equals(that.minimumStudyLevel) && description.equals(that.description);
+        return id.equals(that.id) && companyId.equals(that.companyId) && title.equals(that.title) && offerCategory.equals(that.offerCategory) && offerType.equals(that.offerType) && offerPlace.equals(that.offerPlace) && minimumStudyLevel.equals(that.minimumStudyLevel) && offerWorkTime.equals(that.offerWorkTime) && salary.equals(that.salary) && minimumExperience.equals(that.minimumExperience) && description.equals(that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, companyId, title, offerCategory, offerType, offerPlace, salary, minimumExperience, minimumStudyLevel, description);
+        return Objects.hash(id, companyId, title, offerCategory, offerType, offerPlace, minimumStudyLevel, offerWorkTime, salary, minimumExperience, description);
     }
 }
