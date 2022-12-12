@@ -2,6 +2,7 @@ package jobity.apps.jobboard.error.offers;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import jobity.jobboard.shared.infrastructure.error.AppError;
+import jobity.shared.domain.ResourceNotFoundException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,11 @@ public class OfferExceptionHandler {
     public ResponseEntity<AppError> genericExceptionHandler(Exception exception) {
 
         return resolveError(HttpStatus.INTERNAL_SERVER_ERROR, exception);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<AppError> resourceNotFoundHandler(ResourceNotFoundException exception) {
+        return resolveError(HttpStatus.NOT_FOUND, exception);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)

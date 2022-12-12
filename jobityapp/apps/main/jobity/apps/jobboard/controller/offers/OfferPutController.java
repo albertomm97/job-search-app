@@ -31,7 +31,7 @@ public class OfferPutController {
     })
     @PutMapping("/offers/{id}")
     public ResponseEntity<Void> create(@PathVariable String id,
-                                         @RequestBody OfferRequest request) {
+                                       @RequestBody OfferRequest request) {
 
         offerCreator.create(new CreateOfferCommand(id, request));
 

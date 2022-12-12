@@ -3,6 +3,7 @@ package jobity.jobboard.offers.infrastructure.persistence;
 import jobity.jobboard.companies.domain.CompanyId;
 import jobity.jobboard.offers.domain.*;
 import jobity.jobboard.shared.domain.Category;
+import jobity.shared.domain.ResourceNotFoundException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -71,7 +72,7 @@ public class DbOfferRepository implements OfferRepository {
         Offer offer = jdbcTemplate.queryForObject(offerSql, params, new OfferRowMapper());
 
         if (offer == null) {
-            throw new RuntimeException();
+            throw new ResourceNotFoundException("Offer with id: " + id.value() + " not found.");
         }
 
         return offer;
@@ -94,7 +95,7 @@ public class DbOfferRepository implements OfferRepository {
         List<Offer> offers = jdbcTemplate.query(offerSql, params, new OfferRowMapper());
 
         if (offers.isEmpty()) {
-            throw new RuntimeException();
+            throw new ResourceNotFoundException("Offers with company id: " + id.value() + " not found.");
         }
 
         return offers;
