@@ -4,17 +4,13 @@ import jobity.apps.Starter;
 import jobity.jobboard.companies.domain.CompanyId;
 import jobity.jobboard.offers.domain.*;
 import jobity.jobboard.shared.domain.Category;
-import jobity.shared.domain.ResourceNotFoundException;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,7 +19,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ContextConfiguration(classes = Starter.class)
+@SpringBootTest(classes = Starter.class)
 @ActiveProfiles("test")
 @DataJdbcTest
 @Sql({"/test-data.sql"})

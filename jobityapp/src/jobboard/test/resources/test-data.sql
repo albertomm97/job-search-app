@@ -1,3 +1,5 @@
+DELETE FROM categories;
+
 INSERT INTO categories (category_value, category_type) VALUES
 ('Backend', 'category'), ('Fullstack', 'category'), ('Frontend', 'category'), ('Sysadmin', 'category'), ('Analyst', 'category'),
 ('Remote', 'type'), ('Hybrid', 'type'), ('Office', 'type'),
