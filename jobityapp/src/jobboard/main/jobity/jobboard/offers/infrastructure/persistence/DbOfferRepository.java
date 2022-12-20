@@ -4,14 +4,17 @@ import jobity.jobboard.companies.domain.CompanyId;
 import jobity.jobboard.offers.domain.*;
 import jobity.jobboard.shared.domain.Category;
 import jobity.shared.domain.ResourceNotFoundException;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Primary
 @Component
 public class DbOfferRepository implements OfferRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -30,7 +33,7 @@ public class DbOfferRepository implements OfferRepository {
                 .addValue("salary", offer.salary().value())
                 .addValue("experience", offer.offerExperience().value())
                 .addValue("description", offer.description().value())
-                .addValue("created_at", offer.createdAt())
+                .addValue("created_at", offer.createdAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .getValues();
 
         var categoryValues = offer.categories().stream()
@@ -51,7 +54,7 @@ public class DbOfferRepository implements OfferRepository {
                 "INSERT INTO offers_categories " +
                 "SELECT :offer_id as offer_id, c.id as category_id " +
                 "FROM offers o, categories c " +
-                "WHERE c.value IN (:category, :type, :place, :study_level, :work_time)";
+                "WHERE c.category_value IN (:category, :type, :place, :study_level, :work_time)";
         jdbcTemplate.update(categoryInsert, categoryParams);
     }
 
@@ -62,20 +65,16 @@ public class DbOfferRepository implements OfferRepository {
                 .getValues();
 
         String offerSql =
-                "SELECT o.*, GROUP_CONCAT(c.type) AS category_type, GROUP_CONCAT(c.value) AS category_value " +
+                "SELECT o.*, GROUP_CONCAT(c.category_type) AS category_type, GROUP_CONCAT(c.category_value) AS category_value " +
                 "FROM offers o " +
                 "LEFT JOIN offers_categories oc ON o.id = oc.offer_id " +
                 "LEFT JOIN categories c ON c.id = oc.category_id " +
                 "WHERE o.id = :id " +
                 "GROUP BY o.id ";
 
-        Offer offer = jdbcTemplate.queryForObject(offerSql, params, new OfferRowMapper());
+        List<Offer> offer = jdbcTemplate.query(offerSql, params, new OfferRowMapper());
 
-        if (offer == null) {
-            throw new ResourceNotFoundException("Offer with id: " + id.value() + " not found.");
-        }
-
-        return offer;
+        return offer.isEmpty() ? null : offer.get(0);
     }
 
     @Override
@@ -85,7 +84,7 @@ public class DbOfferRepository implements OfferRepository {
                 .getValues();
 
         String offerSql =
-                "SELECT o.*, GROUP_CONCAT(c.type) AS category_type, GROUP_CONCAT(c.value) AS category_value " +
+                "SELECT o.*, GROUP_CONCAT(c.category_type) AS category_type, GROUP_CONCAT(c.category_value) AS category_value " +
                 "FROM offers o " +
                 "LEFT JOIN offers_categories oc ON o.id = oc.offer_id " +
                 "LEFT JOIN categories c ON c.id = oc.category_id " +
@@ -94,11 +93,7 @@ public class DbOfferRepository implements OfferRepository {
 
         List<Offer> offers = jdbcTemplate.query(offerSql, params, new OfferRowMapper());
 
-        if (offers.isEmpty()) {
-            throw new ResourceNotFoundException("Offers with company id: " + id.value() + " not found.");
-        }
-
-        return offers;
+        return offers.isEmpty() ? null : offers;
     }
 
     @Override

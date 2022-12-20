@@ -3,10 +3,12 @@ package jobity.jobboard.offers.application.create;
 import jobity.jobboard.companies.domain.CompanyId;
 import jobity.jobboard.offers.domain.*;
 
+import jobity.shared.domain.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class OfferCreatorService implements OfferCreator {
@@ -18,6 +20,11 @@ public class OfferCreatorService implements OfferCreator {
 
     @Transactional
     public void create(CreateOfferCommand command) {
+
+        if (offerRepository.findById(new OfferId(command.id())) != null) {
+            throw new ResourceNotFoundException("Ya existe bro");
+        }
+
         Offer offer = new Offer(
                 new OfferId(command.id()),
                 new CompanyId(command.companyId()),

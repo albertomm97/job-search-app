@@ -3,7 +3,6 @@ package jobity.jobboard.offers.domain;
 import jobity.jobboard.companies.domain.CompanyId;
 import jobity.jobboard.shared.domain.Category;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,8 +91,6 @@ public class Offer {
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
-
-
 
     @Override
     public boolean equals(Object o) {

@@ -14,7 +14,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 public class JdbcConfig {
 
     @Bean
-    @Primary
     public HikariDataSource hikariDataSource() {
         return DataSourceBuilder
                 .create()

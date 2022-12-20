@@ -14,11 +14,14 @@ import javax.validation.ConstraintViolationException;
 @ControllerAdvice
 public class OfferExceptionHandler {
 
+    /*
     @ExceptionHandler(Exception.class)
     public ResponseEntity<AppError> genericExceptionHandler(Exception exception) {
 
         return resolveError(HttpStatus.INTERNAL_SERVER_ERROR, exception);
     }
+
+     */
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<AppError> resourceNotFoundHandler(ResourceNotFoundException exception) {

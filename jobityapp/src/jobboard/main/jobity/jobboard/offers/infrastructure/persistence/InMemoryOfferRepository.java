@@ -4,11 +4,14 @@ import jobity.jobboard.companies.domain.CompanyId;
 import jobity.jobboard.offers.domain.Offer;
 import jobity.jobboard.offers.domain.OfferId;
 import jobity.jobboard.offers.domain.OfferRepository;
+import jobity.shared.domain.ResourceNotFoundException;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class InMemoryOfferRepository implements OfferRepository {
     private HashMap<String, Offer> offers = new HashMap<>();
 
@@ -20,7 +23,7 @@ public class InMemoryOfferRepository implements OfferRepository {
     @Override
     public Offer findById(OfferId id) {
         Optional<Offer> offer = Optional.ofNullable(offers.get(id.value()));
-        return offer.orElseThrow(() -> new RuntimeException("Hola"));
+        return offer.orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
     }
 
     @Override
