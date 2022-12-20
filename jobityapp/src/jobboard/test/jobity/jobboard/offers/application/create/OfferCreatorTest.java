@@ -17,9 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 class OfferCreatorTest {
-    @MockBean
+
     private OfferRepository repository;
-    @Autowired
     private OfferCreator creator;
 
     private final Offer savedOffer = new Offer(
