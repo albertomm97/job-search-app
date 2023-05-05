@@ -1,0 +1,85 @@
+CREATE TABLE IF NOT EXISTS companies (
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    email VARCHAR(40) UNIQUE NOT NULL,
+    name VARCHAR(80) NOT NULL,
+    description VARCHAR(2500) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS categories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    category_value VARCHAR(20) NOT NULL,
+    category_type VARCHAR(15) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS offers (
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    company_id VARCHAR(36) NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    salary INT,
+    experience INT,
+    description VARCHAR(2500) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    FOREIGN KEY(company_id) REFERENCES companies(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS offers_categories (
+    offer_id VARCHAR(36) NOT NULL,
+    category_id INT NOT NULL,
+    FOREIGN KEY(offer_id) REFERENCES offers(id) ON DELETE CASCADE,
+    FOREIGN KEY(category_id) REFERENCES categories(id) ON DELETE CASCADE,
+    PRIMARY KEY(offer_id, category_id)
+);
+
+CREATE TABLE IF NOT EXISTS users (
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    email VARCHAR(40) UNIQUE NOT NULL,
+    name VARCHAR(25) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    birthdate TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS cv (
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    user_id VARCHAR(36) NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    description VARCHAR(1000) NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS work_experience (
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    cv_id VARCHAR(36) NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    description VARCHAR(500) NOT NULL,
+    start_date TIMESTAMP NOT NULL,
+    end_date TIMESTAMP,
+    FOREIGN KEY(cv_id) REFERENCES cv(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS studies (
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    cv_id VARCHAR(36) NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    description VARCHAR(250) NOT NULL,
+    start_date TIMESTAMP NOT NULL,
+    end_date TIMESTAMP,
+    study_level VARCHAR(40) NOT NULL,
+    FOREIGN KEY(cv_id) REFERENCES cv(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS languages (
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    cv_id VARCHAR(36) NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    language VARCHAR(40) NOT NULL,
+    FOREIGN KEY(cv_id) REFERENCES cv(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS user_offer (
+    user_id VARCHAR(36) NOT NULL,
+    offer_id VARCHAR(36) NOT NULL,
+    start_date TIMESTAMP NOT NULL,
+    PRIMARY KEY (user_id, offer_id),
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(offer_id) REFERENCES offers(id) ON DELETE CASCADE
+);

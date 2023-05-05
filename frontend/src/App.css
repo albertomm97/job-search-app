@@ -1,0 +1,211 @@
+body {
+  background-color: #f5f5f5;
+}
+
+.App {
+  height: 100vh;
+}
+
+.App-header {
+  border-bottom: 1px solid #cfcfcf;
+  margin-bottom: 4em;
+}
+
+.App-header .companyButton {
+  border-color: #5ca4cd;
+  color: #5ca4cd;
+}
+
+.App-header .companyButton:hover {
+  background-color: #5ca4cd;
+  color: #fff;
+}
+
+.App-header .candidateButton {
+  border-color: #5ca4cd;
+  background-color: #5ca4cd;
+}
+
+.App-header .candidateButton:hover {
+  background-color: #528fb3;
+}
+
+.searchFormContainer {
+  background-color: #5ca4cd;
+  color: white;
+  padding: 1em;
+  border-radius: 0.5em;
+}
+
+.searchContainer {
+  margin-bottom: 1.5em;
+}
+
+.searchFormContainer button {
+  background-color: #db7b66;
+  text-transform: uppercase;
+  border: none;
+}
+
+.searchFormContainer button:hover {
+  background-color: #e05c3e;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  background-color: white;
+  border-radius: 0.5em;
+}
+
+.margin-bottom {
+  margin-bottom: 2em;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+.offerLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.offerLink:hover {
+  color: inherit;
+}
+
+.loginCandidateForm {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 0.5em;
+}
+
+.cvPart {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 0.5em;
+}
+
+.cvPartsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+}
+
+.cvPart {
+  display: flex;
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.cvPart img {
+  object-fit: contain;
+  width: 6rem;
+  padding: 1rem;
+  align-self: flex-start;
+
+  border: 1px solid #e9e7e7;
+  background-color: #fff;
+}
+
+.cvPartHeader {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #cfcfcf;
+  margin-bottom: 1em;
+}
+
+.cvPartHeader .Button {
+  justify-self: flex-start;
+}
+
+.cvPic {
+  width: 10%;
+  margin-right: 2em;
+}
+
+.cvPartHeader .companyButton {
+  border-color: #5ca4cd;
+  color: #5ca4cd;
+}
+
+.cvPartHeader .companyButton:hover {
+  background-color: #5ca4cd;
+  color: #fff;
+}
+
+.cvPartHeader .candidateButton {
+  border-color: #5ca4cd;
+  background-color: #5ca4cd;
+}
+
+.cvPartHeader .candidateButton:hover {
+  background-color: #528fb3;
+}
+
+.experience {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+
+.experienceDetails {
+  width: 90%;
+  margin-bottom: 1em;
+}
+
+.experienceButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.language {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+
+.offerDetail {
+  justify-content: space-between;
+}
+
+.separator {
+  display: flex;
+}
+
+.inscriptionButton button {
+  background-color: #ff6340;
+  border: none;
+  text-transform: uppercase;
+}
+
+.inscriptionButton button:hover {
+  background-color: #d15236;
+}
+
+.cancelInscriptionButton button {
+  background-color: #d82902;
+  border: none;
+  text-transform: uppercase;
+}
+
+.cancelInscriptionButton button:hover {
+  background-color: #942007;
+}

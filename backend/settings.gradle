@@ -1,0 +1,8 @@
+rootProject.name = 'jobityapp'
+
+include ":shared"
+project(':shared').projectDir = new File('src/shared')
+
+include ":jobboard"
+project(':jobboard').projectDir = new File('src/jobboard')
+
